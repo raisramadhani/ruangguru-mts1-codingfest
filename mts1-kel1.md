@@ -57,34 +57,42 @@ _(Catatan: Pastikan penulisan nama Screen persis seperti di atas tanpa spasi, ka
 
 ## TAHAP 2: Desain & Blocks - HalamanUtama
 
-Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**.
+Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**. Di sini kita akan membuat Header dengan Logo terlebih dahulu (yang nanti akan kita copy ke layar lain), baru kemudian membuat tombol menu utama.
 
 ### A. Desain (Designer)
 
-1. **Membuat Wadah Menu (List Icon):** - Dari panel **Palette** > **Layout**, tarik **VerticalArrangement** ke layar.
+1. **Membuat Header & Logo (Untuk di-copy nanti):**
+   - Dari panel **Palette** > **Layout**, tarik **HorizontalArrangement** ke layar bagian paling atas.
+   - Dari **Palette** > **User Interface**, tarik komponen **Image** ke dalam kotak HorizontalArrangement tadi.
+   - Di panel **Components**, klik tombol **Rename Component** pada gambar tersebut, ubah namanya menjadi: `Logo_Aplikasi`.
+   - Di panel **Properties**, cari kotak centang bernama **Clickable** dan **wajib dicentang** (agar logo bisa ditekan untuk kembali ke halaman utama).
+   - _(Opsional)_ Tarik **Label** di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
+2. **Membuat Wadah Menu (List Icon):** - Dari panel **Palette** > **Layout**, tarik **VerticalArrangement** ke bawah header.
    - Di panel **Properties**, ubah **Width** menjadi `Fill parent`.
-2. **Menu Catatan Keuangan:**
+3. **Menu Catatan Keuangan:**
    - Dari **Palette** > **Layout**, tarik **HorizontalArrangement** ke dalam VerticalArrangement tadi.
    - Dari **Palette** > **User Interface**, tarik **Image** (untuk ikon) dan **Button** ke dalam HorizontalArrangement tersebut.
    - Klik **Button** tersebut, klik **Rename Component** menjadi: `Tombol_MenuCatatan`. Di panel **Properties**, ubah **Text** menjadi: `Catatan Pemasukan & Pengeluaran`.
-3. **Menu Cek Tabungan:**
-   - Ulangi langkah ke-2 di atas (buat HorizontalArrangement baru di bawah yang pertama).
+4. **Menu Cek Tabungan:**
+   - Ulangi langkah ke-3 di atas (buat HorizontalArrangement baru di bawah yang pertama).
    - Rename Button menjadi: `Tombol_MenuTabungan`. Ubah Text menjadi: `Cek Tabungan`.
-4. **Menu Tabungan Target:**
-   - Ulangi lagi langkah ke-2.
+5. **Menu Tabungan Target:**
+   - Ulangi lagi langkah ke-3.
    - Rename Button menjadi: `Tombol_MenuTarget`. Ubah Text menjadi: `Tabungan Target`.
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
-1. **Logika Menu Catatan:**
+1. **Logika Logo (Kembali ke Home):** - Klik `Logo_Aplikasi` di panel kiri, tarik `when Logo_Aplikasi.Click do`.
+   - Dari kategori **Control**, tarik `open another screen screenName`. Isi dengan teks pink `"HalamanUtama"`. _(Blok ini juga akan ikut tercopy ke halaman lain nanti)._
+2. **Logika Menu Catatan:**
    - Di panel kiri, klik `Tombol_MenuCatatan`. Tarik blok kuning: `when Tombol_MenuCatatan.Click do`.
    - Klik kategori **Control**, tarik blok `open another screen screenName`.
    - Klik kategori **Text**, tarik blok `" "`, pasangkan dan ketik: `CatatanKeuangan`.
-2. **Logika Menu Tabungan:**
+3. **Logika Menu Tabungan:**
    - Ulangi cara di atas untuk `Tombol_MenuTabungan`, arahkan `screenName` ke `"Tabungan"`.
-3. **Logika Menu Target:**
+4. **Logika Menu Target:**
    - Ulangi cara di atas untuk `Tombol_MenuTarget`, arahkan `screenName` ke `"TabunganTarget"`.
 
 ---
@@ -95,19 +103,24 @@ Ganti screen aktif ke **CatatanKeuangan** melalui dropdown Screen di atas. Di si
 
 ### A. Desain (Designer)
 
-1. **Input Tanggal:** Dari **Palette** > **User Interface**, tarik komponen **DatePicker**.
+1. **Copy-Paste Header:**
+   - Ganti screen kembali ke `HalamanUtama` sebentar.
+   - Klik komponen `HorizontalArrangement` (Header) yang berisi Logo Anda.
+   - Tekan tombol **Ctrl + C** (Copy) di keyboard Anda.
+   - Ganti screen ke `CatatanKeuangan`. Tekan tombol **Ctrl + V** (Paste). Header dan Logo akan otomatis muncul beserta blok logikanya!
+2. **Input Tanggal:** Dari **Palette** > **User Interface**, tarik komponen **DatePicker** ke bawah header.
    - Ubah **Text** menjadi: `Pilih Tanggal`. Rename menjadi: `Input_Tanggal`.
-2. **Input Keterangan:** Tarik komponen **TextBox**.
+3. **Input Keterangan:** Tarik komponen **TextBox**.
    - Ubah **Hint** menjadi: `Keterangan (contoh: Uang Saku)`. Rename menjadi: `Input_Ket`.
-3. **Input Nominal:** Tarik **TextBox** ke bawahnya.
+4. **Input Nominal:** Tarik **TextBox** ke bawahnya.
    - Centang kotak **NumbersOnly** di Properties. Ubah **Hint** menjadi: `Nominal Uang`. Rename menjadi: `Input_Nominal`.
-4. **Tombol Simpan:** Tarik dua buah **Button** berdampingan (gunakan HorizontalArrangement).
+5. **Tombol Simpan:** Tarik dua buah **Button** berdampingan (gunakan HorizontalArrangement).
    - Tombol 1 -> Text: `Simpan Pemasukan`, Rename: `Tombol_SimpanMasuk`.
    - Tombol 2 -> Text: `Simpan Pengeluaran`, Rename: `Tombol_SimpanKeluar`.
-5. **Daftar Riwayat:** Tarik dua buah **ListView** ke layar secara berurutan.
+6. **Daftar Riwayat:** Tarik dua buah **ListView** ke layar secara berurutan.
    - ListView 1 -> Rename: `List_Pemasukan`.
    - ListView 2 -> Rename: `List_Pengeluaran`.
-6. **Alat Tambahan:** - Dari kategori **Storage**, tarik **TinyDB** (Rename: `Database_Kel1`).
+7. **Alat Tambahan:** - Dari kategori **Storage**, tarik **TinyDB** (Rename: `Database_Kel1`).
    - Dari **User Interface**, tarik **Notifier** (Rename: `Notifikasi_Pesan`).
 
 ### B. Kode (Blocks)
@@ -147,11 +160,12 @@ Ganti screen aktif ke **Tabungan**. Halaman ini akan otomatis menghitung total s
 
 ### A. Desain (Designer)
 
-1. **Teks Saldo:** Dari **Palette** > **User Interface**, tarik komponen **Label** ke layar.
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. **Teks Saldo:** Dari **Palette** > **User Interface**, tarik komponen **Label** ke bawah header.
    - Di panel **Properties**, perbesar ukuran Font menjadi `24` dan centang **FontBold**.
    - Ubah **Text** menjadi: `Saldo Anda Saat Ini: Rp 0`.
    - Klik **Rename Component**, ubah menjadi: `Teks_TotalSaldo`.
-2. **Database:** Dari **Palette** > **Storage**, tarik **TinyDB**.
+3. **Database:** Dari **Palette** > **Storage**, tarik **TinyDB**.
    - Klik **Rename Component**, ubah menjadi: `Database_Kel1` (pastikan namanya sama dengan screen sebelumnya agar datanya tersambung).
 
 ### B. Kode (Blocks)
@@ -174,16 +188,17 @@ Ganti screen aktif ke **TabunganTarget**.
 
 ### A. Desain (Designer)
 
-1. **Input Gambar Barang:** Dari **Palette** > **Media**, tarik **ImagePicker**.
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. **Input Gambar Barang:** Dari **Palette** > **Media**, tarik **ImagePicker** ke bawah header.
    - Ubah **Text** menjadi: `Pilih Gambar Barang`. Rename menjadi: `Pilih_Gambar`.
    - Tarik komponen **Image** di bawahnya untuk melihat gambar. Rename menjadi: `Preview_Gambar`. Set Height & Width secukupnya (misal 150 pixels).
-2. **Input Data:** Tarik 3 buah **TextBox** secara berurutan ke bawah.
+3. **Input Data:** Tarik 3 buah **TextBox** secara berurutan ke bawah.
    - TextBox 1 -> Hint: `Nama Barang`. Rename: `Input_NamaBarang`.
    - TextBox 2 -> Hint: `Harga Barang`. Centang _NumbersOnly_. Rename: `Input_HargaBarang`.
    - TextBox 3 -> Hint: `Tanggal Mulai Menabung`. Rename: `Input_TglMulai`.
-3. **Simpan & Info:** - Tarik **Button**, Text: `Simpan Target`, Rename: `Tombol_SimpanTarget`.
+4. **Simpan & Info:** - Tarik **Button**, Text: `Simpan Target`, Rename: `Tombol_SimpanTarget`.
    - Tarik **Label**, Text kosongkan dulu, centang **FontBold**, Rename: `Teks_InfoTarget`.
-4. **Database & Notifier:** Tarik **TinyDB** (Rename: `Database_Kel1`) dan **Notifier**.
+5. **Database & Notifier:** Tarik **TinyDB** (Rename: `Database_Kel1`) dan **Notifier**.
 
 ### B. Kode (Blocks)
 

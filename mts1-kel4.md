@@ -58,27 +58,37 @@ _(Catatan: Pastikan penulisan nama Screen persis seperti di atas tanpa spasi)._
 
 ## TAHAP 2: Desain & Blocks - HalamanUtama
 
-Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**.
+Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**. Di sini kita akan membuat Header dengan Logo terlebih dahulu untuk dicopy ke layar lain.
 
 ### A. Desain (Designer)
 
-1. **Info Saldo & Pengeluaran:** - Dari panel **Palette** > **User Interface**, tarik komponen **Label**. Ubah Text menjadi `Saldo: Rp 0`, perbesar Font jadi `24`, centang **FontBold**. Rename: `Teks_SaldoSekarang`.
+1. **Membuat Header & Logo (Untuk di-copy nanti):**
+   - Dari panel **Palette** > **Layout**, tarik **HorizontalArrangement** ke layar bagian paling atas.
+   - Dari **Palette** > **User Interface**, tarik komponen **Image** ke dalam kotak HorizontalArrangement tadi.
+   - Di panel **Components**, klik tombol **Rename Component** pada gambar tersebut, ubah namanya menjadi: `Logo_Aplikasi`.
+   - Di panel **Properties**, cari kotak centang bernama **Clickable** dan **wajib dicentang** (agar logo bisa ditekan untuk kembali ke halaman utama).
+   - Tarik **Label** di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
+2. **Info Saldo & Pengeluaran:**
+   - Dari panel **Palette** > **User Interface**, tarik komponen **Label** ke bawah header. Ubah Text menjadi `Saldo: Rp 0`, perbesar Font jadi `24`, centang **FontBold**. Rename: `Teks_SaldoSekarang`.
    - Tarik komponen **Label** kedua ke bawahnya. Ubah Text menjadi `Total Pengeluaran: Rp 0`. Rename: `Teks_TotalPengeluaran`.
-2. **Tombol Menu:** Tarik 4 buah **Button** secara berurutan ke layar.
+3. **Tombol Menu:** Tarik 4 buah **Button** secara berurutan ke layar.
    - Button 1 -> Rename: `Menu_Input`, Text: `Tambah Data Keuangan`.
    - Button 2 -> Rename: `Menu_Analisis`, Text: `Analisis Keuangan`.
    - Button 3 -> Rename: `Menu_Challenge`, Text: `Challenge Menabung`.
    - Button 4 -> Rename: `Menu_Riwayat`, Text: `Riwayat Transaksi`.
-3. **Database:** Dari kategori **Storage**, tarik **TinyDB**. Rename menjadi `DB_Kel4`.
+4. **Database:** Dari kategori **Storage**, tarik **TinyDB**. Rename menjadi `DB_Kel4`.
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
-1. **Logika Navigasi Menu:**
+1. **Logika Logo (Kembali ke Home):**
+   - Klik `Logo_Aplikasi` di panel kiri, tarik `when Logo_Aplikasi.Click do`.
+   - Dari kategori **Control**, tarik `open another screen screenName`. Isi dengan teks pink `"HalamanUtama"`.
+2. **Logika Navigasi Menu:**
    - Di panel kiri, klik `Menu_Input`. Tarik blok kuning `when Menu_Input.Click do`. Dari kategori **Control**, tarik blok `open another screen screenName`. Isi dengan teks pink `"InputUang"`.
    - Lakukan langkah yang sama persis untuk ketiga tombol lainnya, arahkan ke `"Analisis"`, `"Challenge"`, dan `"Riwayat"`.
-2. **Menampilkan Saldo (Saat Layar Dibuka):**
+3. **Menampilkan Saldo (Saat Layar Dibuka):**
    - Tarik blok kuning `when HalamanUtama.Initialize do`.
    - Klik `Teks_SaldoSekarang`, tarik `set Teks_SaldoSekarang.Text to`. Gunakan blok `join` dengan teks `"Saldo: Rp "` digabung dengan hasil kurang (blok Math `-`) antara `GetValue` tag `"SaldoMasuk"` dan `GetValue` tag `"SaldoKeluar"`.
    - Klik `Teks_TotalPengeluaran`, tarik `set Teks_TotalPengeluaran.Text to`. Gunakan blok `join` dengan teks `"Total Pengeluaran: Rp "` digabung dengan `GetValue` tag `"SaldoKeluar"`.
@@ -91,21 +101,26 @@ Ganti screen aktif ke **InputUang**.
 
 ### A. Desain (Designer)
 
-1. **Input Keterangan:** Tarik **TextBox**. Hint: `Keterangan Transaksi`. Rename: `Input_Ket`.
-2. **Input Nominal:** Tarik **TextBox**. Centang **NumbersOnly**. Hint: `Nominal Uang`. Rename: `Input_Nominal`.
-3. **Kategori Pengeluaran:** Tarik komponen **Spinner**.
+1. **Copy-Paste Header:**
+   - Ganti screen kembali ke `HalamanUtama` sebentar.
+   - Klik komponen `HorizontalArrangement` (Header) yang berisi Logo Anda.
+   - Tekan tombol **Ctrl + C** (Copy) di keyboard Anda.
+   - Ganti screen ke `InputUang`. Tekan tombol **Ctrl + V** (Paste). Header dan Logo akan otomatis muncul beserta blok logikanya.
+2. **Input Keterangan:** Tarik **TextBox** ke bawah header. Hint: `Keterangan Transaksi`. Rename: `Input_Ket`.
+3. **Input Nominal:** Tarik **TextBox**. Centang **NumbersOnly**. Hint: `Nominal Uang`. Rename: `Input_Nominal`.
+4. **Kategori Pengeluaran:** Tarik komponen **Spinner**.
    - Di Properties, cari kotak **ElementsFromString**. Ketik persis seperti ini (tanpa spasi setelah koma): `Makan,Jajan,Transport`.
    - Rename: `Kategori_Keluar`.
-4. **Tombol Simpan:** Tarik 2 buah **Button**.
+5. **Tombol Simpan:** Tarik 2 buah **Button**.
    - Button 1 -> Rename: `Simpan_Pemasukan`, Text: `Simpan sebagai Pemasukan`.
    - Button 2 -> Rename: `Simpan_Pengeluaran`, Text: `Simpan sebagai Pengeluaran`.
-5. **Database & Notifikasi:** Tarik **TinyDB** (Rename: `DB_Kel4`) dan **Notifier** (Rename: `Notifikasi_Pesan`).
+6. **Database & Notifikasi:** Tarik **TinyDB** (Rename: `DB_Kel4`) dan **Notifier** (Rename: `Notifikasi_Pesan`).
 
 ### B. Kode (Blocks)
 
 Pindah ke **Blocks**.
 
-1. **Buat Variabel List:** Di kategori **Variables**, buat `global RiwayatSmt` dan isi dengan `create empty list`. (Ini berguna untuk mencatat riwayat di Tahap 6 nanti).
+1. **Buat Variabel List:** Di kategori **Variables**, buat `global RiwayatSmt` dan isi dengan `create empty list`.
 2. **Menyimpan Pemasukan:**
    - Tarik blok kuning `when Simpan_Pemasukan.Click do`.
    - Tarik blok ungu `StoreValue` tag `"SaldoMasuk"`. Isi `valueToStore` dengan blok Math `+` (`GetValue` `"SaldoMasuk"` ditambah `Input_Nominal.Text`).
@@ -115,7 +130,7 @@ Pindah ke **Blocks**.
    - Tarik blok kuning `when Simpan_Pengeluaran.Click do`.
    - **Simpan Total Keluar:** Tarik `StoreValue` tag `"SaldoKeluar"`. Isi dengan `GetValue` `"SaldoKeluar"` ditambah `Input_Nominal.Text`.
    - **Simpan per Kategori:** Tarik `StoreValue` sekali lagi.
-     - Di bagian `tag`, pasangkan blok hijau muda `Kategori_Keluar.Selection`. (Ini otomatis membuat tag bernama Makan, Jajan, atau Transport sesuai pilihan user).
+     - Di bagian `tag`, pasangkan blok hijau muda `Kategori_Keluar.Selection`.
      - Di bagian `valueToStore`, pasangkan blok Math `+`. Kiri: `GetValue` (tag-nya juga `Kategori_Keluar.Selection`, default 0). Kanan: `Input_Nominal.Text`.
    - Simpan List Riwayat seperti langkah pemasukan, gunakan teks `"[-] " + Kategori_Keluar.Selection + ": Rp "`.
    - Munculkan Notifier pesan: `"Pengeluaran Tersimpan!"`.
@@ -128,11 +143,12 @@ Ganti screen aktif ke **Analisis**. Halaman ini akan mengecek seberapa boros/hem
 
 ### A. Desain (Designer)
 
-1. Tarik **Label** judul: `Analisis Pengeluaran Anda`. Centang FontBold.
-2. Tarik **Label** baru, Rename: `Teks_PersenKategori`. Ubah Text sementara: `Menghitung persentase...`.
-3. Tarik **Label** baru, Rename: `Teks_PengeluaranTerbesar`. Ubah Text: `Pengeluaran terbesar di...`.
-4. Tarik **Label** baru, Rename: `Teks_Status`. Perbesar Font, Text: `Status: ...`.
-5. Tarik **TinyDB** (Rename: `DB_Kel4`).
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. Tarik **Label** judul di bawah header: `Analisis Pengeluaran Anda`. Centang FontBold.
+3. Tarik **Label** baru, Rename: `Teks_PersenKategori`. Ubah Text sementara: `Menghitung persentase...`.
+4. Tarik **Label** baru, Rename: `Teks_PengeluaranTerbesar`. Ubah Text: `Pengeluaran terbesar di...`.
+5. Tarik **Label** baru, Rename: `Teks_Status`. Perbesar Font, Text: `Status: ...`.
+6. Tarik **TinyDB** (Rename: `DB_Kel4`).
 
 ### B. Kode (Blocks)
 
@@ -141,7 +157,7 @@ Pindah ke **Blocks**. Tarik blok kuning `when Analisis.Initialize do`. Semua log
 1. **Ambil Data:** Buat 4 variabel `local` sementara untuk memudahkan: `UangMakan` (dari GetValue "Makan"), `UangJajan` (dari "Jajan"), `UangTransport` (dari "Transport"), dan `TotKeluar` (dari "SaldoKeluar"). (Beri nilai default 1 pada TotKeluar untuk menghindari error sistem/bagi nol).
 2. **Menghitung Persentase:**
    - Klik `Teks_PersenKategori`, tarik `set Text to`.
-   - Gunakan blok `join` bertingkat untuk menyusun teks: `"Makan: "` + `(UangMakan / TotKeluar * 100)` + `"% | Jajan: "` + `(UangJajan / TotKeluar * 100)` + `"% | Transport: "` + `(UangTransport / TotKeluar * 100)` + `"%"`. (Gunakan blok Math `*` dan `/` untuk rumus ini).
+   - Gunakan blok `join` bertingkat untuk menyusun teks: `"Makan: "` + `(UangMakan / TotKeluar * 100)` + `"% | Jajan: "` + `(UangJajan / TotKeluar * 100)` + `"% | Transport: "` + `(UangTransport / TotKeluar * 100)` + `"%"`.
 3. **Mencari Pengeluaran Terbesar:**
    - Gunakan blok `if then` dengan 2 tambahan `else if`.
    - Jika `UangMakan` > `UangJajan` **dan** `UangMakan` > `UangTransport`, set `Teks_PengeluaranTerbesar.Text` ke `"Paling banyak dipakai untuk MAKAN"`.
@@ -149,8 +165,8 @@ Pindah ke **Blocks**. Tarik blok kuning `when Analisis.Initialize do`. Semua log
    - Else, set teks ke `"Paling banyak dipakai untuk TRANSPORT"`.
 4. **Status Boros/Hemat:**
    - Tambahkan blok `if else` di bawah susunan tadi.
-   - Jika `GetValue` tag `"SaldoKeluar"` **>** `GetValue` tag `"SaldoMasuk"`, maka `set Teks_Status.Text to` `"Status: KAMU BOROS!"` (Warna teks bisa diubah merah di Designer).
-   - Else, `set Teks_Status.Text to` `"Status: KAMU HEMAT!"` (Warna teks hijau).
+   - Jika `GetValue` tag `"SaldoKeluar"` **>** `GetValue` tag `"SaldoMasuk"`, maka `set Teks_Status.Text to` `"Status: KAMU BOROS!"`.
+   - Else, `set Teks_Status.Text to` `"Status: KAMU HEMAT!"`.
 
 ---
 
@@ -160,11 +176,12 @@ Ganti screen aktif ke **Challenge**.
 
 ### A. Desain (Designer)
 
-1. Tarik komponen **Spinner**.
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. Tarik komponen **Spinner** ke bawah header.
    - Di Properties, ketik di **ElementsFromString**: `No Jajan Day,Hari ini nabung 10.000,Hemat 50%`.
    - Rename: `Pilih_Challenge`.
-2. Tarik komponen **Button**. Text: `Terima Challenge Ini`. Rename: `Tombol_TerimaTantangan`.
-3. Tarik **Label** besar di bawahnya. Text: `Belum ada challenge aktif`. FontBold, warna teks Oranye. Rename: `Teks_TantanganAktif`.
+3. Tarik komponen **Button**. Text: `Terima Challenge Ini`. Rename: `Tombol_TerimaTantangan`.
+4. Tarik **Label** besar di bawahnya. Text: `Belum ada challenge aktif`. FontBold, warna teks Oranye. Rename: `Teks_TantanganAktif`.
 
 ### B. Kode (Blocks)
 
@@ -173,7 +190,6 @@ Pindah ke **Blocks**. Halaman ini logikanya sangat sederhana.
 1. Klik `Tombol_TerimaTantangan`, tarik blok kuning `when Click do`.
 2. Klik `Teks_TantanganAktif`, tarik blok hijau muda `set Teks_TantanganAktif.Text to`.
 3. Pasangkan dengan blok hijau tua `Pilih_Challenge.Selection`.
-4. _(Opsional)_ Tambahkan blok Notifier untuk memunculkan pesan semangatan!
 
 ---
 
@@ -183,9 +199,10 @@ Ganti screen aktif ke **Riwayat**.
 
 ### A. Desain (Designer)
 
-1. Tarik **Label** untuk judul, Text: `Daftar Semua Transaksi Anda`.
-2. Tarik komponen **ListView**. Ubah **Height** dan **Width** menjadi `Fill parent` agar memenuhi layar ke bawah. Rename: `Daftar_Riwayat`.
-3. Tarik **TinyDB** (Rename: `DB_Kel4`).
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. Tarik **Label** untuk judul di bawah header, Text: `Daftar Semua Transaksi Anda`.
+3. Tarik komponen **ListView**. Ubah **Height** dan **Width** menjadi `Fill parent` agar memenuhi layar ke bawah. Rename: `Daftar_Riwayat`.
+4. Tarik **TinyDB** (Rename: `DB_Kel4`).
 
 ### B. Kode (Blocks)
 

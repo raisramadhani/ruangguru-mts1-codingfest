@@ -57,32 +57,41 @@ _(Catatan: Pastikan penulisan nama Screen persis seperti di atas tanpa spasi, ka
 
 ## TAHAP 2: Desain & Blocks - HalamanUtama
 
-Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**.
+Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**. Di sini kita akan membuat Header dengan Logo terlebih dahulu untuk dicopy ke layar lain.
 
 ### A. Desain (Designer)
 
-1. **Teks Saldo:** Dari panel **Palette** > **User Interface**, tarik komponen **Label** ke layar.
+1. **Membuat Header & Logo (Untuk di-copy nanti):**
+   - Dari panel **Palette** > **Layout**, tarik **HorizontalArrangement** ke layar bagian paling atas.
+   - Dari **Palette** > **User Interface**, tarik komponen **Image** ke dalam kotak HorizontalArrangement tadi.
+   - Di panel **Components**, klik tombol **Rename Component** pada gambar tersebut, ubah namanya menjadi: `Logo_Aplikasi`.
+   - Di panel **Properties**, cari kotak centang bernama **Clickable** dan **wajib dicentang** (agar logo bisa ditekan untuk kembali ke halaman utama).
+   - Tarik **Label** di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
+2. **Teks Saldo:** Dari panel **Palette** > **User Interface**, tarik komponen **Label** ke layar di bawah header.
    - Di panel **Properties**, perbesar ukuran Font menjadi `24` dan centang **FontBold**.
    - Ubah **Text** menjadi: `Saldo Anda Saat Ini: Rp 0`.
    - Klik **Rename Component**, ubah menjadi: `Teks_SaldoSekarang`.
-2. **Preview Riwayat:** Tarik **Label** baru, ubah Text: `Riwayat Terakhir:`. Tarik komponen **ListView** di bawahnya, ubah **Height** menjadi `15 Percent`. Rename: `Preview_Riwayat`.
-3. **Preview Wishlist:** Tarik **Label** baru, ubah Text: `Wishlist Kebutuhan:`. Tarik komponen **ListView** di bawahnya, ubah **Height** menjadi `15 Percent`. Rename: `Preview_Wishlist`.
-4. **Tombol Menu:** Dari **Palette**, tarik 3 buah **Button** ke layar.
+3. **Preview Riwayat:** Tarik **Label** baru, ubah Text: `Riwayat Terakhir:`. Tarik komponen **ListView** di bawahnya, ubah **Height** menjadi `15 Percent`. Rename: `Preview_Riwayat`.
+4. **Preview Wishlist:** Tarik **Label** baru, ubah Text: `Wishlist Kebutuhan:`. Tarik komponen **ListView** di bawahnya, ubah **Height** menjadi `15 Percent`. Rename: `Preview_Wishlist`.
+5. **Tombol Menu:** Dari **Palette**, tarik 3 buah **Button** ke layar.
    - Button 1 -> Rename: `Menu_Riwayat`, Text: `Buka Riwayat Lengkap`.
    - Button 2 -> Rename: `Menu_Input`, Text: `Input Pemasukan & Pengeluaran`.
    - Button 3 -> Rename: `Menu_Wishlist`, Text: `Buka Wishlist Barang`.
-5. **Database:** Dari kategori **Storage**, tarik **TinyDB**. Rename menjadi: `DB_Kel2`.
+6. **Database:** Dari kategori **Storage**, tarik **TinyDB**. Rename menjadi: `DB_Kel2`.
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
-1. **Logika Navigasi Menu:**
+1. **Logika Logo (Kembali ke Home):**
+   - Klik `Logo_Aplikasi` di panel kiri, tarik `when Logo_Aplikasi.Click do`.
+   - Dari kategori **Control**, tarik `open another screen screenName`. Isi dengan teks pink `"HalamanUtama"`.
+2. **Logika Navigasi Menu:**
    - Di panel kiri, klik `Menu_Riwayat`. Tarik blok kuning: `when Menu_Riwayat.Click do`.
    - Dari kategori **Control**, tarik blok `open another screen screenName`. Isi dengan teks pink `" "` lalu ketik: `RiwayatTrans`.
    - Lakukan cara yang sama persis untuk `Menu_Input` (arahkan ke `"InputUang"`) dan `Menu_Wishlist` (arahkan ke `"WishlistBarang"`).
-2. **Memuat Data Saldo & Preview:**
-   - Tarik blok kuning `when HalamanUtama.Initialize do` (artinya saat layar dibuka).
+3. **Memuat Data Saldo & Preview:**
+   - Tarik blok kuning `when HalamanUtama.Initialize do`.
    - **Set Saldo:** Klik `Teks_SaldoSekarang`, tarik blok hijau muda `set Teks_SaldoSekarang.Text to`. Gunakan blok `join` (kategori Text). Lubang 1 ketik `"Saldo: Rp "`. Lubang 2 gunakan blok Math kurang `-`. Sisi kirinya isi dengan `GetValue` tag `"SaldoMasuk"`, sisi kanannya isi dengan `GetValue` tag `"SaldoKeluar"`. (Beri `valueIfTagNotThere` angka `0`).
    - **Set Preview:** Klik `Preview_Riwayat`, tarik `set Preview_Riwayat.Elements to`, pasangkan dengan `GetValue` tag `"DataRiwayat"` (default: `create empty list`). Lakukan hal sama untuk `Preview_Wishlist` dengan tag `"ListKebutuhan"`.
 
@@ -94,22 +103,28 @@ Ganti screen aktif ke **InputUang**.
 
 ### A. Desain (Designer)
 
-1. **Input Keterangan:** Tarik komponen **TextBox**. Ubah **Hint** menjadi: `Keterangan (Contoh: Jajan / Nabung)`. Rename menjadi: `Input_Ket`.
-2. **Input Nominal:** Tarik **TextBox** ke bawahnya. Centang kotak **NumbersOnly**. Ubah **Hint** menjadi: `Nominal Uang`. Rename menjadi: `Input_Nominal`.
-3. **Tombol Simpan:** Tarik dua buah **Button** (bisa diletakkan berdampingan memakai HorizontalArrangement).
+1. **Copy-Paste Header:**
+   - Ganti screen kembali ke `HalamanUtama` sebentar.
+   - Klik komponen `HorizontalArrangement` (Header) yang berisi Logo Anda.
+   - Tekan tombol **Ctrl + C** (Copy) di keyboard Anda.
+   - Ganti screen ke `InputUang`. Tekan tombol **Ctrl + V** (Paste). Header dan Logo akan otomatis muncul beserta blok logikanya.
+2. **Input Keterangan:** Tarik komponen **TextBox** ke bawah header. Ubah **Hint** menjadi: `Keterangan (Contoh: Jajan / Nabung)`. Rename menjadi: `Input_Ket`.
+3. **Input Nominal:** Tarik **TextBox** ke bawahnya. Centang kotak **NumbersOnly**. Ubah **Hint** menjadi: `Nominal Uang`. Rename menjadi: `Input_Nominal`.
+4. **Tombol Simpan:** Tarik dua buah **Button** (bisa diletakkan berdampingan memakai HorizontalArrangement).
    - Button 1 -> Text: `Simpan Pemasukan`, Rename: `Tombol_Masuk`.
    - Button 2 -> Text: `Simpan Pengeluaran`, Rename: `Tombol_Keluar`.
-4. **Database & Notifikasi:** Tarik **TinyDB** (Rename: `DB_Kel2`) dan **Notifier** (Rename: `Notifikasi_Pesan`).
+5. **Database & Notifikasi:** Tarik **TinyDB** (Rename: `DB_Kel2`) dan **Notifier** (Rename: `Notifikasi_Pesan`).
 
 ### B. Kode (Blocks)
 
-Pindah ke tampilan **Blocks**. Kita butuh variabel list agar data riwayat tidak tertimpa.
+Pindah ke tampilan **Blocks**.
 
 1. **Variabel List:** Di kategori **Variables**, tarik `initialize global name to`. Ganti `name` jadi `RiwayatSmt`. Isi dengan blok biru muda `create empty list`.
 2. **Simpan Pemasukan:**
    - Tarik blok kuning `when Tombol_Masuk.Click do`.
    - **Tambah Saldo Masuk:** Tarik blok ungu `StoreValue` tag `"SaldoMasuk"`. Isinya: blok Math `+` (`GetValue` tag `"SaldoMasuk"` ditambah `Input_Nominal.Text`).
-   - **Simpan ke List Riwayat:** - Tarik blok oranye `set global RiwayatSmt to`, isi dengan `GetValue` tag `"DataRiwayat"` (default `create empty list`).
+   - **Simpan ke List Riwayat:**
+     - Tarik blok oranye `set global RiwayatSmt to`, isi dengan `GetValue` tag `"DataRiwayat"` (default `create empty list`).
      - Tarik blok biru muda `add items to list`. List-nya isi dengan `get global RiwayatSmt`. Item-nya gunakan blok `join` (Isi 3 lubang: teks pink `"[+] "`, `Input_Ket.Text`, dan teks pink `" - Rp "`, lalu `Input_Nominal.Text`).
      - Tarik `StoreValue` tag `"DataRiwayat"`, isinya `get global RiwayatSmt`.
    - **Notifikasi:** Tarik blok `ShowAlert`, isi pesan: `"Pemasukan Berhasil Disimpan!"`.
@@ -125,10 +140,11 @@ Ganti screen aktif ke **RiwayatTrans**.
 
 ### A. Desain (Designer)
 
-1. Tarik **Label** judul, ubah Text: `Seluruh Riwayat Transaksi Anda`.
-2. Tarik komponen **ListView**. Ubah **Height** dan **Width** menjadi `Fill parent`. Rename: `Daftar_SemuaRiwayat`.
-3. Tarik **Button** di bawahnya. Ubah Text: `Kembali ke Beranda`. Rename: `Tombol_Kembali`.
-4. Tarik **TinyDB** (Rename: `DB_Kel2`).
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. Tarik **Label** judul di bawah header, ubah Text: `Seluruh Riwayat Transaksi Anda`.
+3. Tarik komponen **ListView**. Ubah **Height** dan **Width** menjadi `Fill parent`. Rename: `Daftar_SemuaRiwayat`.
+4. Tarik **Button** di bawahnya. Ubah Text: `Kembali ke Beranda`. Rename: `Tombol_Kembali`.
+5. Tarik **TinyDB** (Rename: `DB_Kel2`).
 
 ### B. Kode (Blocks)
 
@@ -143,18 +159,19 @@ Pindah ke tampilan **Blocks**.
 
 ## TAHAP 5: Desain & Blocks - WishlistBarang
 
-Ganti screen aktif ke **WishlistBarang**. Di sini kita akan memisahkan barang berdasarkan kategori.
+Ganti screen aktif ke **WishlistBarang**.
 
 ### A. Desain (Designer)
 
-1. **Input Nama Barang:** Tarik **TextBox**. Ubah Hint: `Nama Barang Impian`. Rename: `Input_NamaBarang`.
-2. **Pilih Kategori:** Dari panel **Palette** > **User Interface**, tarik komponen **Spinner**.
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. **Input Nama Barang:** Tarik **TextBox** ke bawah header. Ubah Hint: `Nama Barang Impian`. Rename: `Input_NamaBarang`.
+3. **Pilih Kategori:** Dari panel **Palette** > **User Interface**, tarik komponen **Spinner**.
    - Di panel **Properties**, cari kotak `ElementsFromString`. Ketik persis seperti ini (tanpa spasi setelah koma): `Kebutuhan,Keinginan`.
    - Rename: `Pilih_Kategori`.
-3. **Tombol Simpan:** Tarik **Button**. Text: `Simpan Wishlist`. Rename: `Tombol_SimpanWishlist`.
-4. **Daftar Kebutuhan:** Tarik **Label** (Text: `Daftar Kebutuhan`), lalu tarik **ListView** di bawahnya (Rename: `List_Kebutuhan`).
-5. **Daftar Keinginan:** Tarik **Label** (Text: `Daftar Keinginan`), lalu tarik **ListView** di bawahnya (Rename: `List_Keinginan`).
-6. **Database:** Tarik **TinyDB** (Rename: `DB_Kel2`).
+4. **Tombol Simpan:** Tarik **Button**. Text: `Simpan Wishlist`. Rename: `Tombol_SimpanWishlist`.
+5. **Daftar Kebutuhan:** Tarik **Label** (Text: `Daftar Kebutuhan`), lalu tarik **ListView** di bawahnya (Rename: `List_Kebutuhan`).
+6. **Daftar Keinginan:** Tarik **Label** (Text: `Daftar Keinginan`), lalu tarik **ListView** di bawahnya (Rename: `List_Keinginan`).
+7. **Database:** Tarik **TinyDB** (Rename: `DB_Kel2`).
 
 ### B. Kode (Blocks)
 

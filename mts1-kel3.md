@@ -58,31 +58,40 @@ _(Catatan: Pastikan penulisan nama Screen persis seperti di atas tanpa spasi)._
 
 ## TAHAP 2: Desain & Blocks - HalamanUtama
 
-Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**. Di sini kita akan membuat menu berbentuk kotak dan sistem Level.
+Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**. Di sini kita akan membuat Header dengan Logo terlebih dahulu untuk dicopy ke layar lain, dilanjutkan menu berbentuk kotak dan sistem Level.
 
 ### A. Desain (Designer)
 
-1. **Teks Level:** Dari panel **Palette** > **User Interface**, tarik komponen **Label** ke bagian paling atas layar.
+1. **Membuat Header & Logo (Untuk di-copy nanti):**
+   - Dari panel **Palette** > **Layout**, tarik **HorizontalArrangement** ke layar bagian paling atas.
+   - Dari **Palette** > **User Interface**, tarik komponen **Image** ke dalam kotak HorizontalArrangement tadi.
+   - Di panel **Components**, klik tombol **Rename Component** pada gambar tersebut, ubah namanya menjadi: `Logo_Aplikasi`.
+   - Di panel **Properties**, cari kotak centang bernama **Clickable** dan **wajib dicentang** (agar logo bisa ditekan untuk kembali ke halaman utama).
+   - Tarik **Label** di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
+2. **Teks Level:** Dari panel **Palette** > **User Interface**, tarik komponen **Label** ke bawah header.
    - Di panel **Properties**, perbesar Font menjadi `24` dan centang **FontBold**.
    - Ubah Text menjadi: `Level Anda: Menghitung...`.
    - Klik **Rename Component**, ubah menjadi: `Teks_Level`.
-2. **Layout Kotak:** Dari panel **Palette** > **Layout**, tarik **TableArrangement**.
+3. **Layout Kotak:** Dari panel **Palette** > **Layout**, tarik **TableArrangement** ke bawah label level.
    - Di Properties, ubah **Columns** menjadi `2` dan **Rows** menjadi `2`.
-3. **Tombol Menu:** Tarik 4 buah **Button** ke dalam kotak TableArrangement tersebut.
+4. **Tombol Menu:** Tarik 4 buah **Button** ke dalam kotak TableArrangement tersebut.
    - Button 1 -> Rename: `Menu_Input`, Text: `Input Saldo`.
    - Button 2 -> Rename: `Menu_Visual`, Text: `Visual Tabungan`.
    - Button 3 -> Rename: `Menu_Riwayat`, Text: `Riwayat`.
    - Button 4 -> Rename: `Menu_Tips`, Text: `Tips Menabung`.
-4. **Database:** Tarik **TinyDB** dari kategori Storage. Rename menjadi `DB_Kel3`.
+5. **Database:** Tarik **TinyDB** dari kategori Storage. Rename menjadi `DB_Kel3`.
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
-1. **Logika Navigasi Menu:**
+1. **Logika Logo (Kembali ke Home):**
+   - Klik `Logo_Aplikasi` di panel kiri, tarik `when Logo_Aplikasi.Click do`.
+   - Dari kategori **Control**, tarik `open another screen screenName`. Isi dengan teks pink `"HalamanUtama"`.
+2. **Logika Navigasi Menu:**
    - Di panel kiri, klik `Menu_Input`. Tarik blok kuning `when Menu_Input.Click do`. Dari kategori **Control**, tarik blok `open another screen screenName`. Isi dengan teks pink `"InputData"`.
    - Ulangi langkah di atas untuk `Menu_Visual` (buka `"SaldoVisual"`), `Menu_Riwayat` (buka `"RiwayatTrans"`), dan `Menu_Tips` (buka `"TipsTrik"`).
-2. **Sistem Level Tabungan:**
+3. **Sistem Level Tabungan:**
    - Tarik blok kuning `when HalamanUtama.Initialize do`.
    - Kita buat variabel untuk menghitung saldo sementara. Dari kategori **Variables**, tarik `initialize local name to`. Ganti nama jadi `SaldoTotal`.
    - Isi dengan blok Math kurang `-`. Kiri: `GetValue` tag `"TotalMasuk"`. Kanan: `GetValue` tag `"TotalKeluar"`. (Beri default `0`).
@@ -101,15 +110,20 @@ Ganti screen aktif ke **InputData**.
 
 ### A. Desain (Designer)
 
-1. Tarik 3 buah **TextBox** secara berurutan. Centang **NumbersOnly** untuk ketiganya.
+1. **Copy-Paste Header:**
+   - Ganti screen kembali ke `HalamanUtama` sebentar.
+   - Klik komponen `HorizontalArrangement` (Header) yang berisi Logo Anda.
+   - Tekan tombol **Ctrl + C** (Copy) di keyboard Anda.
+   - Ganti screen ke `InputData`. Tekan tombol **Ctrl + V** (Paste). Header dan Logo akan otomatis muncul beserta blok logikanya.
+2. Tarik 3 buah **TextBox** secara berurutan ke bawah header. Centang **NumbersOnly** untuk ketiganya.
    - TextBox 1 -> Hint: `Input Pemasukan`, Rename: `Input_Masuk`.
    - TextBox 2 -> Hint: `Input Pengeluaran`, Rename: `Input_Keluar`.
    - TextBox 3 -> Hint: `Input Target Menabung`, Rename: `Input_Target`.
-2. Tarik 3 buah **Button** di bawah masing-masing TextBox.
+3. Tarik 3 buah **Button** di bawah masing-masing TextBox.
    - Button 1 -> Text: `Simpan Pemasukan`, Rename: `Tombol_Masuk`.
    - Button 2 -> Text: `Simpan Pengeluaran`, Rename: `Tombol_Keluar`.
    - Button 3 -> Text: `Simpan Target`, Rename: `Tombol_Target`.
-3. Tarik **TinyDB** (Rename: `DB_Kel3`) dan **Notifier** (Rename: `Notifikasi_Pesan`).
+4. Tarik **TinyDB** (Rename: `DB_Kel3`) dan **Notifier** (Rename: `Notifikasi_Pesan`).
 
 ### B. Kode (Blocks)
 
@@ -117,10 +131,12 @@ Pindah ke **Blocks**.
 
 1. **Buat Variabel:** Tarik `initialize global name to` (ganti nama jadi `RiwayatSmt`). Isi dengan `create empty list`.
 2. **Simpan Target:** Klik `Tombol_Target`, tarik `when Click`. Pasang blok `StoreValue` tag `"TargetNominal"` dengan isi `Input_Target.Text`. Munculkan `ShowAlert`: `"Target Disimpan!"`.
-3. **Simpan Pemasukan:** - Klik `Tombol_Masuk`, tarik `when Click`.
+3. **Simpan Pemasukan:**
+   - Klik `Tombol_Masuk`, tarik `when Click`.
    - Gunakan `StoreValue` tag `"TotalMasuk"`. Isinya: blok Math `+` (`GetValue` tag `"TotalMasuk"` ditambah `Input_Masuk.Text`).
    - Simpan ke riwayat: Set `global RiwayatSmt` ke `GetValue` tag `"DataRiwayat"`. Gunakan `add items to list` (item diisi blok `join` teks `"[Masuk] Rp "` dan `Input_Masuk.Text`). Simpan lagi listnya pakai `StoreValue` tag `"DataRiwayat"`.
-4. **Simpan Pengeluaran:** - Ulangi logika pemasukan, tetapi gunakan `Tombol_Keluar.Click`, tag `"TotalKeluar"`, dan teks awalan list `"[Keluar] Rp "`.
+4. **Simpan Pengeluaran:**
+   - Ulangi logika pemasukan, tetapi gunakan `Tombol_Keluar.Click`, tag `"TotalKeluar"`, dan teks awalan list `"[Keluar] Rp "`.
 
 ---
 
@@ -130,18 +146,19 @@ Ganti screen aktif ke **SaldoVisual**. Ini adalah fitur andalan kelompok Anda (v
 
 ### A. Desain (Designer)
 
-1. **Membuat Wadah Toples:** Dari panel **Palette** > **Layout**, tarik **VerticalArrangement** ke layar.
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. **Membuat Wadah Toples:** Dari panel **Palette** > **Layout**, tarik **VerticalArrangement** ke bawah header.
    - Di Properties, ubah **AlignVertical** menjadi `Bottom`.
    - Ubah **Height** menjadi `300 pixels` dan **Width** menjadi `150 pixels`.
    - Ubah **BackgroundColor** menjadi `Light Gray` (Abu-abu terang). Rename: `Wadah_Toples`.
-2. **Membuat Air:** Di dalam VerticalArrangement tadi, tarik sebuah **Label**.
+3. **Membuat Air:** Di dalam VerticalArrangement tadi, tarik sebuah **Label**.
    - Kosongkan bagian **Text**.
    - Ubah **BackgroundColor** menjadi `Blue` (Biru).
    - Ubah **Width** menjadi `Fill parent`.
    - Ubah **Height** menjadi `1 Percent` (ini wajib diisi 1% agar nanti bisa diatur dari kode).
    - Rename: `Visual_Air`.
-3. Tarik **Label** baru di bawah toples untuk teks info. Ubah Text: `Target Tercapai: 0%`. Rename: `Teks_Persen`.
-4. Tarik **TinyDB** (`DB_Kel3`) dan **Notifier** (`Notifikasi_Pesan`).
+4. Tarik **Label** baru di bawah toples untuk teks info. Ubah Text: `Target Tercapai: 0%`. Rename: `Teks_Persen`.
+5. Tarik **TinyDB** (`DB_Kel3`) dan **Notifier** (`Notifikasi_Pesan`).
 
 ### B. Kode (Blocks)
 
@@ -156,7 +173,8 @@ Pindah ke **Blocks**.
    - Rumusnya: `(SaldoSekarang / TargetUang) * 100`. (Gunakan blok Math untuk menyusun rumus ini).
 4. **Cegah Air Tumpah (Lebih dari 100%):** Tarik blok `if then` dari Control.
    - Jika `PersenAir` > `100`, maka tarik blok `set PersenAir to` angka `100`. (Ini agar visual air tidak keluar dari toples).
-5. **Mengatur Tinggi Air:** - Klik `Visual_Air`, tarik blok hijau muda `set Visual_Air.HeightPercent to`. Pasangkan dengan nilai dari variabel `PersenAir`.
+5. **Mengatur Tinggi Air:**
+   - Klik `Visual_Air`, tarik blok hijau muda `set Visual_Air.HeightPercent to`. Pasangkan dengan nilai dari variabel `PersenAir`.
    - Klik `Teks_Persen`, tarik `set Teks_Persen.Text to`. Gunakan blok `join`, gabungkan `"Target Tercapai: "` dengan variabel `PersenAir` dan simbol `"% "`.
 6. **Notifikasi Level Baru:** Di bagian bawah, tambahkan blok `if`. Jika `PersenAir` = `100`, munculkan blok `ShowAlert` dari Notifier, isi dengan `"Selamat! Target Tercapai, Level Terbaru Terbuka!"`.
 
@@ -168,9 +186,10 @@ Ganti screen aktif ke **RiwayatTrans**.
 
 ### A. Desain (Designer)
 
-1. Tarik **Label** judul, ubah Text: `Catatan Riwayat Transaksi`.
-2. Tarik komponen **ListView**. Ubah **Height** dan **Width** menjadi `Fill parent`. Rename: `Daftar_SemuaRiwayat`.
-3. Tarik **TinyDB** (Rename: `DB_Kel3`).
+1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
+2. Tarik **Label** judul di bawah header, ubah Text: `Catatan Riwayat Transaksi`.
+3. Tarik komponen **ListView**. Ubah **Height** dan **Width** menjadi `Fill parent`. Rename: `Daftar_SemuaRiwayat`.
+4. Tarik **TinyDB** (Rename: `DB_Kel3`).
 
 ### B. Kode (Blocks)
 
@@ -184,14 +203,36 @@ Pindah ke **Blocks**.
 
 ## TAHAP 6: Desain & Blocks - TipsTrik
 
-Ganti screen aktif ke **TipsTrik**. Di sini kita membuat panduan statis.
+Ganti screen aktif ke **TipsTrik** melalui menu dropdown di bagian atas layar. Di sini kita akan membuat panduan tips menabung statis yang langsung muncul tanpa perlu coding rumit.
 
 ### A. Desain (Designer)
 
-1. Tarik **Label** untuk judul, Text: `Tips & Trik Menabung`. Centang FontBold.
-2. Tarik komponen **ListView**. Rename: `List_Tips`.
-   - Di Properties, cari **ElementsFromString**. Ketik: `1. Sisihkan bukan Sisakan, 2. Bawa Bekal Sekolah, 3. Tahan Keinginan Jajan, 4. Catat Setiap Pengeluaran`.
+1. **Paste Header Utama:**
+   - Ganti screen kembali ke `HalamanUtama` sebentar.
+   - Klik komponen `HorizontalArrangement` (Header) yang berisi Logo Anda.
+   - Tekan tombol **Ctrl + C** (Copy) di keyboard.
+   - Ganti screen kembali ke `TipsTrik`. Tekan tombol **Ctrl + V** (Paste). Header dan Logo otomatis terpasang rapi di bagian atas.
+2. **Membuat Judul Halaman:**
+   - Dari panel **Palette** > **User Interface**, klik tahan dan tarik komponen **Label** ke layar, tepat di bawah header.
+   - Perhatikan panel **Properties** di sebelah kanan:
+     - Centang kotak **FontBold** (agar huruf tebal).
+     - Ubah **FontSize** menjadi `20` (agar ukuran huruf lebih besar).
+     - Ubah kotak **Text** menjadi: `Tips & Trik Menabung`.
+3. **Menyiapkan Tempat Daftar (ListView):**
+   - Dari panel **Palette** > **User Interface**, tarik komponen **ListView** letakkan tepat di bawah judul tadi.
+   - Di panel **Properties**, ubah **Height** menjadi `Fill parent` dan **Width** menjadi `Fill parent` agar daftar tips mengisi penuh sisa ruang kosong di layar HP.
+   - Di panel **Components**, klik **Rename Component** dan ubah namanya menjadi: `List_Tips`.
+4. **Memasukkan Teks 3 Tips Otomatis:**
+   - Pastikan komponen `List_Tips` masih Anda klik/pilih.
+   - Di panel **Properties** sebelah kanan, cari kotak putih yang bernama **ElementsFromString**.
+   - Di dalam kotak tersebut, ketik 3 contoh tips ini persis seperti di bawah ini **(PENTING: Pisahkan dengan tanda koma, dan TIDAK BOLEH ADA SPASI SETELAH TANDA KOMA):**
+     `1. Bawa bekal minum dan makanan dari rumah,2. Tahan godaan jajan hal yang tidak penting,3. Sisihkan uang di awal minggu bukan menyisakan`
+   - Setelah selesai mengetik, klik sembarang tempat di layar kosong dan tulisan tersebut akan otomatis tersusun menjadi daftar menurun.
 
-_Untuk halaman Tips, karena isinya statis (hanya tulisan panduan), pengaturan lewat Designer (ElementsFromString) sudah cukup dan tidak memerlukan Blocks yang rumit._
+### B. Kode (Blocks)
 
-> **PENTING:** Silakan coba Run program dari awal sampai akhir, periksa apakah tinggi air di dalam toples naik secara otomatis sesuai target! Jangan lupa Save project Anda.
+Untuk halaman Tips & Trik ini, karena isinya bersifat statis (hanya tulisan panduan bacaan untuk user), maka pengaturan lewat **ElementsFromString** di langkah ke-4 tadi sudah sangat cukup.
+
+Anda **TIDAK PERLU** menyusun kode apa pun di tampilan Blocks untuk halaman ini.
+
+> **PENTING:** Silakan coba Run program dari awal sampai akhir di HP Anda! Coba lakukan Input Saldo, lalu periksa halaman Visual Tabungan apakah tinggi air di dalam toples sudah naik otomatis sesuai target. Jika semuanya lancar, jangan lupa klik **Projects > Save project**.
