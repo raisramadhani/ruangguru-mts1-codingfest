@@ -64,43 +64,77 @@ Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **Halam
 
 1. **Membuat Header & Logo (Untuk di-copy nanti):**
    - Dari panel **Palette** > **Layout**, tarik **HorizontalArrangement** ke layar bagian paling atas.
-   - Dari **Palette** > **User Interface**, tarik komponen **Image** ke dalam kotak HorizontalArrangement tadi.
+   - Di panel **Properties**, ubah **Width** menjadi `Fill parent`.
+   - Dari panel **Palette** > **User Interface**, tarik komponen **Image** ke dalam kotak HorizontalArrangement tadi.
    - Di panel **Components**, klik tombol **Rename Component** pada gambar tersebut, ubah namanya menjadi: `Logo_Aplikasi`.
    - Di panel **Properties**, cari kotak centang bernama **Clickable** dan **wajib dicentang** (agar logo bisa ditekan untuk kembali ke halaman utama).
-   - Tarik **Label** di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
+   - Tarik komponen **Label** letakkan di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
 2. **Teks Level:** Dari panel **Palette** > **User Interface**, tarik komponen **Label** ke bawah header.
-   - Di panel **Properties**, perbesar Font menjadi `24` dan centang **FontBold**.
-   - Ubah Text menjadi: `Level Anda: Menghitung...`.
+   - Di panel **Properties**, perbesar ukuran **FontSize** menjadi `24` dan centang **FontBold**.
+   - Ubah **Text** menjadi: `Level Anda: Menghitung...`.
    - Klik **Rename Component**, ubah menjadi: `Teks_Level`.
 3. **Layout Kotak:** Dari panel **Palette** > **Layout**, tarik **TableArrangement** ke bawah label level.
-   - Di Properties, ubah **Columns** menjadi `2` dan **Rows** menjadi `2`.
-4. **Tombol Menu:** Tarik 4 buah **Button** ke dalam kotak TableArrangement tersebut.
-   - Button 1 -> Rename: `Menu_Input`, Text: `Input Saldo`.
-   - Button 2 -> Rename: `Menu_Visual`, Text: `Visual Tabungan`.
-   - Button 3 -> Rename: `Menu_Riwayat`, Text: `Riwayat`.
-   - Button 4 -> Rename: `Menu_Tips`, Text: `Tips Menabung`.
-5. **Database:** Tarik **TinyDB** dari kategori Storage. Rename menjadi `DB_Kel3`.
+   - Di panel **Properties**, ubah **Columns** menjadi `2` dan **Rows** menjadi `2`.
+   - Ubah **Width** menjadi `Fill parent` agar tombol nanti tersusun rapi di tengah.
+4. **Tombol Menu:** Tarik 4 buah **Button** ke dalam kotak TableArrangement tersebut secara berurutan.
+   - Button 1 -> Rename: `Menu_Input`, Ubah Text: `Input Saldo`.
+   - Button 2 -> Rename: `Menu_Visual`, Ubah Text: `Visual Tabungan`.
+   - Button 3 -> Rename: `Menu_Riwayat`, Ubah Text: `Riwayat`.
+   - Button 4 -> Rename: `Menu_Tips`, Ubah Text: `Tips Menabung`.
+5. **Database:** Dari panel **Palette** > **Storage**, tarik **TinyDB** ke layar (akan muncul di bawah layar). Klik **Rename Component** menjadi `DB_Kel3`.
 
 ### B. Kode (Blocks)
 
-Pindah ke tampilan **Blocks**.
+Pindah ke tampilan **Blocks** (tombol di pojok kanan atas). Ikuti langkah ini secara perlahan karena kita akan menyusun logika yang cukup panjang.
 
-1. **Logika Logo (Kembali ke Home):**
-   - Klik `Logo_Aplikasi` di panel kiri, tarik `when Logo_Aplikasi.Click do`.
-   - Dari kategori **Control**, tarik `open another screen screenName`. Isi dengan teks pink `"HalamanUtama"`.
-2. **Logika Navigasi Menu:**
-   - Di panel kiri, klik `Menu_Input`. Tarik blok kuning `when Menu_Input.Click do`. Dari kategori **Control**, tarik blok `open another screen screenName`. Isi dengan teks pink `"InputData"`.
-   - Ulangi langkah di atas untuk `Menu_Visual` (buka `"SaldoVisual"`), `Menu_Riwayat` (buka `"RiwayatTrans"`), dan `Menu_Tips` (buka `"TipsTrik"`).
-3. **Sistem Level Tabungan:**
-   - Tarik blok kuning `when HalamanUtama.Initialize do`.
-   - Kita buat variabel untuk menghitung saldo sementara. Dari kategori **Variables**, tarik `initialize local name to`. Ganti nama jadi `SaldoTotal`.
-   - Isi dengan blok Math kurang `-`. Kiri: `GetValue` tag `"TotalMasuk"`. Kanan: `GetValue` tag `"TotalKeluar"`. (Beri default `0`).
-   - Di bawahnya, tarik blok `if then` dari **Control**. Klik ikon gir biru pada blok `if`, tarik kotak `else if` sebanyak 3 kali, dan terakhir `else`.
-   - **Kondisi 1:** Tarik blok Math kurang dari `<`. Jika `get SaldoTotal` < `50000`, pasang `set Teks_Level.Text to` teks pink `"Level: Newbie Boros"`.
-   - **Kondisi 2:** Jika `get SaldoTotal` < `100000`, pasang teks `"Level: Apprentice Hemat"`.
-   - **Kondisi 3:** Jika `get SaldoTotal` < `500000`, pasang teks `"Level: Warrior Nabung"`.
-   - **Kondisi 4:** Jika `get SaldoTotal` < `1000000`, pasang teks `"Level: Knight Investasi"`.
-   - **Kondisi Else (Lebih dari 1 juta):** Pasang teks `"Level: Legend of Saldo"`.
+**1. Logika Logo (Kembali ke Home):**
+
+- Di panel sebelah kiri, temukan dan klik `Logo_Aplikasi`. Tarik blok kuning teratas: `when Logo_Aplikasi.Click do`.
+- Klik kategori **Control** (warna cokelat/oranye), gulir ke bawah, tarik blok `open another screen screenName`.
+- Klik kategori **Text** (warna pink), tarik blok teks kosong `" "` paling atas. Pasangkan ke blok control tadi, lalu ketik di dalamnya: `HalamanUtama`.
+
+**2. Logika Navigasi Menu:**
+
+- Di panel kiri, klik `Menu_Input`. Tarik blok kuning `when Menu_Input.Click do`.
+- Ulangi langkah mengambil blok `open another screen screenName` dan blok teks pink `" "`. Pasangkan dan ketik: `InputData`.
+- Ulangi cara yang sama persis untuk ketiga tombol lainnya:
+  - Untuk `Menu_Visual` arahkan ke teks pink `"SaldoVisual"`.
+  - Untuk `Menu_Riwayat` arahkan ke teks pink `"RiwayatTrans"`.
+  - Untuk `Menu_Tips` arahkan ke teks pink `"TipsTrik"`.
+
+**3. Sistem Level Tabungan (Menghitung Saldo Otomatis):**
+
+- Di panel kiri, klik `HalamanUtama` (ikon layar). Tarik blok kuning: `when HalamanUtama.Initialize do`.
+- **Membuat Variabel Hitungan:** Klik kategori **Variables** (oranye tua), tarik blok `initialize local name to` (pilih yang ada colokan di kanannya). Ganti tulisan `name` menjadi `SaldoTotal`. Masukkan blok ini ke dalam blok kuning Initialize.
+- **Rumus Kurang:** Klik kategori **Math** (biru muda), tarik blok kurang `-`. Pasangkan ke sebelah variabel `SaldoTotal`.
+- **Mengambil Data Masuk:** Di panel kiri, klik `DB_Kel3`. Tarik blok ungu `call DB_Kel3.GetValue`. Pasangkan ke sisi **KIRI** blok kurang `-`.
+  - Pada bagian `tag`: Tarik blok teks pink `" "`, ketik `TotalMasuk`.
+  - Pada bagian `valueIfTagNotThere` (PENTING): Klik kategori **Math**, tarik blok angka `0` paling atas. Pasangkan ke lubang ini. (Ini berfungsi agar jika belum ada tabungan, saldonya dianggap 0, bukan error).
+- **Mengambil Data Keluar:** Ulangi langkah di atas. Tarik lagi `call DB_Kel3.GetValue` dan pasangkan ke sisi **KANAN** blok kurang `-`.
+  - Pada bagian `tag`: Tarik blok teks pink `" "`, ketik `TotalKeluar`.
+  - Pada bagian `valueIfTagNotThere`: Tarik blok angka `0` dari kategori **Math**.
+
+**4. Sistem Level Tabungan (Menentukan Gelar Level):**
+
+- Masih di dalam blok Initialize, klik kategori **Control**, tarik blok `if then` dan letakkan di bawah hitungan variabel tadi (masih di dalam bingkai oranye variabel).
+- **Menambah Kondisi:** Klik ikon **gir biru** kecil di sudut blok `if`. Tarik kotak `else if` sebanyak 3 kali ke bawah tulisan `if`, lalu terakhir tarik kotak `else` 1 kali. Klik lagi gir biru untuk menutupnya.
+- **Kondisi 1 (< 50.000):**
+  - Dari kategori **Math**, tarik blok sama dengan `=`. Klik tanda panahnya dan ubah menjadi kurang dari `<`. Pasangkan ke sebelah tulisan `if`.
+  - Arahkan kursor mouse (jangan diklik, didiamkan saja) di atas tulisan `SaldoTotal` pada blok variabel oranye Anda. Akan muncul blok kecil `get SaldoTotal`. Tarik dan pasangkan ke sisi KIRI blok `<`.
+  - Dari kategori **Math**, tarik blok angka `0`, pasangkan ke sisi KANAN blok `<`. Ketik angka `50000`.
+  - Di bagian `then`: Klik `Teks_Level` di panel kiri, tarik blok hijau muda `set Teks_Level.Text to`. Pasangkan blok teks pink `" "` lalu ketik: `Level: Newbie Boros`.
+- **Kondisi 2 (< 100.000):**
+  - Ulangi langkah membuat blok `<` seperti di atas untuk dipasang di sebelah `else if` pertama.
+  - Kiri: isi dengan `get SaldoTotal`. Kanan: isi dengan angka `100000`.
+  - Di bagian `then`: `set Teks_Level.Text to` isi teks pink `"Level: Apprentice Hemat"`.
+- **Kondisi 3 (< 500.000):**
+  - Kiri: `get SaldoTotal`. Kanan: angka `500000`.
+  - Di bagian `then`: `set Teks_Level.Text to` isi teks pink `"Level: Warrior Nabung"`.
+- **Kondisi 4 (< 1.000.000):**
+  - Kiri: `get SaldoTotal`. Kanan: angka `1000000`.
+  - Di bagian `then`: `set Teks_Level.Text to` isi teks pink `"Level: Knight Investasi"`.
+- **Kondisi Else (Lebih dari 1 juta):**
+  - Di bagian lubang `else` paling bawah, Anda tidak perlu repot membuat kondisi angka lagi. Cukup tarik `set Teks_Level.Text to` dan isi dengan teks pink `"Level: Legend of Saldo"`.
 
 ---
 
