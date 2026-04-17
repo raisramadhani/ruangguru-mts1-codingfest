@@ -56,7 +56,7 @@ _(Catatan: Pastikan penulisan nama Screen persis seperti di atas tanpa spasi)._
 
 ---
 
-## TAHAP 2: Desain & Blocks - HalamanUtama
+## TAHAP 2s: Desain & Blocks - HalamanUtama
 
 Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**. Di sini kita akan membuat Header dengan Logo terlebih dahulu untuk dicopy ke layar lain, dilanjutkan menu berbentuk kotak dan sistem Level.
 
@@ -102,7 +102,7 @@ Pindah ke tampilan **Blocks** (tombol di pojok kanan atas). Ikuti langkah ini se
   - Untuk `Menu_Riwayat` arahkan ke teks pink `"RiwayatTrans"`.
   - Untuk `Menu_Tips` arahkan ke teks pink `"TipsTrik"`.
 
-**3. Sistem Level Tabungan (Menghitung Saldo Otomatis):**
+**3. Sistem Level Tabungan (Menghitung Saldo Otomatiss):**
 
 - Di panel kiri, klik `HalamanUtama` (ikon layar). Tarik blok kuning: `when HalamanUtama.Initialize do`.
 - **Membuat Variabel Hitungan:** Klik kategori **Variables** (oranye tua), tarik blok `initialize local name to` (pilih yang ada colokan di kanannya). Ganti tulisan `name` menjadi `SaldoTotal`. Masukkan blok ini ke dalam blok kuning Initialize.
