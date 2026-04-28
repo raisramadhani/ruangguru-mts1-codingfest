@@ -1,6 +1,6 @@
 # Tutorial Membuat Aplikasi KELOMPOK 2 (MTsN 1 Surakarta)
 
-Pastikan Anda sudah login ke MIT App Inventor, membuat project baru, dan berada di tampilan **Designer** (tombol di pojok kanan atas).
+Pastikan Anda sudah login ke MIT App Inventor, membuat project baru, dan berada di tampilan **Designer** (perhatikan tombol **Designer** di pojok kanan atas layar harus aktif/menyala).
 
 ---
 
@@ -10,32 +10,39 @@ Kita akan membuat halaman Login terlebih dahulu di **Screen1** (Screen bawaan sa
 
 ### A. Desain (Designer)
 
-1. **Input Username:** Dari panel **Palette** > **User Interface**, tarik komponen **TextBox** ke layar.
-   - Di panel **Properties** (sebelah kanan), ubah **Hint** menjadi: `Masukkan Username`.
-   - Di panel **Components**, klik **Rename Component** dan ubah namanya menjadi: `InputUsername`.
-2. **Input Password:** Dari panel **Palette** > **User Interface**, tarik komponen **PasswordTextBox** ke layar.
-   - Di panel **Properties**, ubah **Hint** menjadi: `Masukkan Password`.
-   - Klik **Rename Component**, ubah menjadi: `InputPassword`.
-3. **Tombol Login:** Dari **Palette**, tarik komponen **Button** ke layar.
-   - Di panel **Properties**, ubah **Text** menjadi: `Masuk / Login`.
-   - Klik **Rename Component**, ubah menjadi: `Tombol_Masuk`.
-4. **Pesan Notifikasi:** Dari panel **Palette**, tarik komponen **Notifier** ke layar (komponen ini akan muncul di bawah layar). Biarkan namanya tetap `Notifier1`.
+1. **Input Username:** Di sebelah kiri layar pada panel **Palette** > klik kategori **User Interface**, klik dan tarik (drag) komponen **TextBox** ke gambar HP di tengah layar (Viewer).
+   - Beralih ke panel **Properties** di sebelah kanan layar. Cari kolom **Hint**, hapus isinya dan ketik: `Masukkan Username`.
+   - Beralih ke panel **Components** (di sebelah kanan gambar HP). Klik komponen `TextBox1`, lalu klik tombol **Rename** di bawahnya. Ubah namanya menjadi: `InputUsername` lalu klik OK.
+2. **Input Password:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **PasswordTextBox** ke gambar HP di bawah Username.
+   - Di panel **Properties**, cari kolom **Hint** dan ubah menjadi: `Masukkan Password`.
+   - Di panel **Components**, klik komponennya lalu klik **Rename**, ubah menjadi: `InputPassword`.
+3. **Tombol Login:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **Button** ke gambar HP.
+   - Di panel **Properties**, cari kolom **Text** dan ubah tulisannya menjadi: `Masuk / Login`.
+   - Di panel **Components**, klik **Rename**, ubah menjadi: `Tombol_Masuk`.
+4. **Pesan Notifikasi:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **Notifier** ke gambar HP. (Catatan: Komponen ini tidak akan terlihat di layar HP, melainkan muncul di bagian bawah layar sebagai _Non-visible components_). Biarkan namanya tetap `Notifier1` di panel Components.
 
 ### B. Kode (Blocks)
 
-Pindah ke tampilan **Blocks** (pojok kanan atas).
+Pindah ke tampilan **Blocks** dengan cara mengklik tombol **Blocks** di pojok kanan atas layar.
 
-1. Di panel kiri, klik `Tombol_Masuk`, tarik blok kuning paling atas: `when Tombol_Masuk.Click do`.
-2. Dari kategori **Control** (warna oranye), tarik blok `if then else` ke dalam blok kuning.
+1. **Memulai Tombol:** Di panel sebelah kiri bawah (daftar komponen), cari dan klik `Tombol_Masuk`. Akan muncul laci berisi blok, tarik blok kuning paling atas: `when Tombol_Masuk.Click do` ke area putih yang kosong.
+2. **Membuat Syarat:** Di panel kiri atas (Built-in), klik kategori **Control** (warna oranye), tarik blok `if then else` ke dalam celah blok kuning tadi.
 3. **Mengatur Syarat Login (Bagian if):**
-   - Dari kategori **Logic** (hijau terang), tarik blok `and` pasangkan ke sebelah `if`.
-   - Di lubang kiri `and`: Tarik blok sama dengan `=` dari kategori **Logic**. Sisi kirinya isi dengan blok hijau tua `InputUsername.Text`, sisi kanannya isi dengan teks pink `" "` dan ketik `123`.
-   - Di lubang kanan `and`: Tarik blok `=` lagi. Sisi kirinya isi dengan blok hijau tua `InputPassword.Text`, sisi kanannya isi dengan teks pink `" "` dan ketik `123`.
+   - Di panel kiri atas, klik kategori **Logic** (hijau terang), tarik blok `and` pasangkan ke sebelah kanan tulisan `if`.
+   - **Di lubang kiri `and`:** Klik kategori **Logic** lagi, tarik blok sama dengan `=`.
+     - **Sisi kirinya:** Klik komponen `InputUsername` di panel kiri bawah, scroll ke bawah dan cari blok hijau tua `InputUsername.Text`, tarik ke sisi kiri blok `=`.
+     - **Sisi kanannya:** Klik kategori **Text** (warna pink), tarik blok kosong `" "` paling atas. Pasangkan ke sisi kanan `=`, lalu klik bagian tengahnya dan ketik `123`.
+   - **Di lubang kanan `and`:** Lakukan hal yang sama. Tarik blok `=` dari kategori **Logic**.
+     - **Sisi kirinya:** Klik komponen `InputPassword` di panel kiri bawah, cari dan tarik blok hijau tua `InputPassword.Text`.
+     - **Sisi kanannya:** Ambil blok teks pink kosong `" "` dari kategori **Text**, pasangkan lalu ketik `123`.
 4. **Jika Login Benar (Bagian then):**
-   - Klik `Notifier1`, tarik blok ungu `call Notifier1.ShowAlert notice`. Pasangkan ke dalam `then`. Isi dengan teks pink `" "` dan ketik: `Selamat datang kembali!`.
-   - Dari kategori **Control**, tarik blok `open another screen screenName`. Isi dengan teks pink `" "` dan ketik: `HalamanUtama`.
+   - Di panel kiri bawah, klik komponen `Notifier1`, cari dan tarik blok ungu `call Notifier1.ShowAlert notice`. Pasangkan ke dalam celah `then`.
+   - Klik kategori **Text**, ambil blok kosong `" "`, pasangkan ke sebelah `notice`, dan ketik: `Selamat datang kembali!`.
+   - Di panel kiri atas, klik kategori **Control**, scroll agak ke bawah dan tarik blok `open another screen screenName` ke bawah blok ungu tadi.
+   - Ambil lagi blok teks pink kosong `" "` dari kategori **Text**, pasangkan, dan ketik persis: `HalamanUtama`.
 5. **Jika Login Salah (Bagian else):**
-   - Tarik lagi blok ungu `call Notifier1.ShowAlert notice` ke dalam `else`. Isi dengan teks pink `" "` dan ketik: `Password Salah kak`.
+   - Lakukan cara yang sama: klik `Notifier1` di panel kiri bawah, tarik blok ungu `call Notifier1.ShowAlert notice` ke dalam celah `else`.
+   - Ambil blok teks pink `" "` dari kategori **Text** dan ketik: `Password Salah kak`.
 
 ---
 
@@ -43,151 +50,180 @@ Pindah ke tampilan **Blocks** (pojok kanan atas).
 
 Sekarang kita perlu membuat 4 Screen baru sesuai dengan konsep aplikasi pengelolaan tabungan Anda.
 
-1. Di bagian atas layar, klik tombol **Add Screen**.
-2. Ketik nama: `HalamanUtama` lalu klik OK.
-3. Ulangi langkah 1, ketik nama: `RiwayatTrans` lalu klik OK.
-4. Ulangi langkah 1, ketik nama: `InputUang` lalu klik OK.
-5. Ulangi langkah 1, ketik nama: `WishlistBarang` lalu klik OK.
+1. Di bagian paling atas layar App Inventor, klik tombol **Add Screen**.
+2. Akan muncul kotak pop-up. Ketik nama: `HalamanUtama` lalu klik OK.
+3. Ulangi langkah 1, klik **Add Screen**, ketik nama: `RiwayatTrans` lalu klik OK.
+4. Ulangi langkah 1, klik **Add Screen**, ketik nama: `InputUang` lalu klik OK.
+5. Ulangi langkah 1, klik **Add Screen**, ketik nama: `WishlistBarang` lalu klik OK.
 
 _(Catatan: Pastikan penulisan nama Screen persis seperti di atas tanpa spasi, karena huruf besar/kecil sangat berpengaruh di App Inventor)._
 
-> **PENTING:** Silakan coba Run program di HP Anda untuk memastikan bisa login dengan username "123" dan password "123".
+> **PENTING:** Silakan coba Connect/Run program di HP Anda (Pilih menu Connect > AI Companion) untuk memastikan bisa login dengan username "123" dan password "123".
 
 ---
 
 ## TAHAP 2: Desain & Blocks - HalamanUtama
 
-Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama**. Di sini kita akan membuat Header dengan Logo terlebih dahulu untuk dicopy ke layar lain.
+Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama** (Cek kotak dropdown). Kembali ke mode **Designer**. Di sini kita akan membuat Header dengan Logo terlebih dahulu untuk dicopy ke layar lain.
 
 ### A. Desain (Designer)
 
 1. **Membuat Header & Logo (Untuk di-copy nanti):**
-   - Dari panel **Palette** > **Layout**, tarik **HorizontalArrangement** ke layar bagian paling atas.
-   - Dari **Palette** > **User Interface**, tarik komponen **Image** ke dalam kotak HorizontalArrangement tadi.
-   - Di panel **Components**, klik tombol **Rename Component** pada gambar tersebut, ubah namanya menjadi: `Logo_Aplikasi`.
-   - Di panel **Properties**, cari kotak centang bernama **Clickable** dan **wajib dicentang** (agar logo bisa ditekan untuk kembali ke halaman utama).
-   - Tarik **Label** di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
-2. **Teks Saldo:** Dari panel **Palette** > **User Interface**, tarik komponen **Label** ke layar di bawah header.
-   - Di panel **Properties**, perbesar ukuran Font menjadi `24` dan centang **FontBold**.
-   - Ubah **Text** menjadi: `Saldo Anda Saat Ini: Rp 0`.
-   - Klik **Rename Component**, ubah menjadi: `Teks_SaldoSekarang`.
-3. **Preview Riwayat:** Tarik **Label** baru, ubah Text: `Riwayat Terakhir:`. Tarik komponen **ListView** di bawahnya, ubah **Height** menjadi `15 Percent`. Rename: `Preview_Riwayat`.
-4. **Preview Wishlist:** Tarik **Label** baru, ubah Text: `Wishlist Kebutuhan:`. Tarik komponen **ListView** di bawahnya, ubah **Height** menjadi `15 Percent`. Rename: `Preview_Wishlist`.
-5. **Tombol Menu:** Dari **Palette**, tarik 3 buah **Button** ke layar.
-   - Button 1 -> Rename: `Menu_Riwayat`, Text: `Buka Riwayat Lengkap`.
-   - Button 2 -> Rename: `Menu_Input`, Text: `Input Pemasukan & Pengeluaran`.
-   - Button 3 -> Rename: `Menu_Wishlist`, Text: `Buka Wishlist Barang`.
-6. **Database:** Dari kategori **Storage**, tarik **TinyDB**. Rename menjadi: `DB_Kel2`.
+   - Dari panel **Palette** > klik kategori **Layout**, tarik **HorizontalArrangement** ke layar HP bagian paling atas.
+   - Dari panel **Palette** > klik kategori **User Interface**, tarik komponen **Image** dan masukkan _ke dalam_ kotak HorizontalArrangement tadi.
+   - Di panel **Components**, klik komponen gambar tersebut, klik tombol **Rename**, ubah namanya menjadi: `Logo_Aplikasi`.
+   - Di panel **Properties**, scroll ke bawah, cari kotak centang bernama **Clickable** dan **wajib Anda centang** (agar logo bisa ditekan untuk kembali ke halaman utama).
+   - _(Opsional)_ Tarik komponen **Label** letakkan di sebelah logo jika ingin memberi teks judul aplikasi MTsN 1.
+2. **Teks Saldo:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **Label** ke layar HP di bawah header.
+   - Di panel **Properties**, perbesar ukuran **FontSize** menjadi `24` dan centang kotak **FontBold**.
+   - Ubah kolom **Text** menjadi: `Saldo Anda Saat Ini: Rp 0`.
+   - Di panel **Components**, klik **Rename**, ubah menjadi: `Teks_SaldoSekarang`.
+3. **Preview Riwayat:** - Tarik **Label** baru ke bawah saldo, ubah Text di panel Properties: `Riwayat Terakhir:`.
+   - Tarik komponen **ListView** ke bawah Label tersebut, cari menu **Height** di Properties, klik lalu ubah menjadi `15 Percent`. Di panel Components Rename: `Preview_Riwayat`.
+4. **Preview Wishlist:** - Tarik **Label** baru, ubah Text: `Wishlist Kebutuhan:`.
+   - Tarik komponen **ListView** di bawahnya, ubah **Height** menjadi `15 Percent`. Rename: `Preview_Wishlist`.
+5. **Tombol Menu:** Dari panel **Palette** > **User Interface**, tarik 3 buah **Button** ke layar secara berurutan.
+   - Button 1 -> Rename: `Menu_Riwayat`, ubah Text: `Buka Riwayat Lengkap`.
+   - Button 2 -> Rename: `Menu_Input`, ubah Text: `Input Pemasukan & Pengeluaran`.
+   - Button 3 -> Rename: `Menu_Wishlist`, ubah Text: `Buka Wishlist Barang`.
+6. **Database (Wajib):** Dari panel **Palette** > kategori **Storage**, tarik komponen **TinyDB** ke layar. Rename menjadi: `DB_Kel2`.
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
 1. **Logika Logo (Kembali ke Home):**
-   - Klik `Logo_Aplikasi` di panel kiri, tarik `when Logo_Aplikasi.Click do`.
-   - Dari kategori **Control**, tarik `open another screen screenName`. Isi dengan teks pink `"HalamanUtama"`.
+   - Di panel kiri bawah, klik `Logo_Aplikasi`, tarik blok kuning `when Logo_Aplikasi.Click do`.
+   - Di panel kiri atas, klik kategori **Control**, tarik blok `open another screen screenName`. Ambil blok teks pink `" "` dari kategori **Text** dan ketik: `HalamanUtama`.
 2. **Logika Navigasi Menu:**
-   - Di panel kiri, klik `Menu_Riwayat`. Tarik blok kuning: `when Menu_Riwayat.Click do`.
-   - Dari kategori **Control**, tarik blok `open another screen screenName`. Isi dengan teks pink `" "` lalu ketik: `RiwayatTrans`.
-   - Lakukan cara yang sama persis untuk `Menu_Input` (arahkan ke `"InputUang"`) dan `Menu_Wishlist` (arahkan ke `"WishlistBarang"`).
+   - Di panel kiri bawah, klik `Menu_Riwayat`. Tarik blok kuning: `when Menu_Riwayat.Click do`.
+   - Dari kategori **Control**, tarik blok `open another screen screenName`. Pasangkan teks pink `" "` dari kategori **Text** lalu ketik: `RiwayatTrans`.
+   - Lakukan cara yang **sama persis** untuk `Menu_Input` (arahkan teks pink ke `"InputUang"`) dan `Menu_Wishlist` (arahkan teks pink ke `"WishlistBarang"`).
 3. **Memuat Data Saldo & Preview:**
-   - Tarik blok kuning `when HalamanUtama.Initialize do`.
-   - **Set Saldo:** Klik `Teks_SaldoSekarang`, tarik blok hijau muda `set Teks_SaldoSekarang.Text to`. Gunakan blok `join` (kategori Text). Lubang 1 ketik `"Saldo: Rp "`. Lubang 2 gunakan blok Math kurang `-`. Sisi kirinya isi dengan `GetValue` tag `"SaldoMasuk"`, sisi kanannya isi dengan `GetValue` tag `"SaldoKeluar"`. (Beri `valueIfTagNotThere` angka `0`).
-   - **Set Preview:** Klik `Preview_Riwayat`, tarik `set Preview_Riwayat.Elements to`, pasangkan dengan `GetValue` tag `"DataRiwayat"` (default: `create empty list`). Lakukan hal sama untuk `Preview_Wishlist` dengan tag `"ListKebutuhan"`.
+   - Di panel kiri bawah, klik nama screen `HalamanUtama` (ikon HP). Tarik blok kuning `when HalamanUtama.Initialize do`.
+   - **Set Saldo:** Klik komponen `Teks_SaldoSekarang`, tarik blok hijau muda `set Teks_SaldoSekarang.Text to`. Masukkan ke blok kuning.
+     - Klik kategori **Text**, tarik blok `join` dan pasangkan.
+     - Lubang atas `join`: ambil teks pink `" "` ketik `"Saldo: Rp "`.
+     - Lubang bawah `join`: ambil blok Math (biru muda) kurang `-`. Sisi kirinya isi dengan blok ungu `call DB_Kel2.GetValue` (tag teks pink `"SaldoMasuk"`, default angka `0`). Sisi kanannya isi dengan `call DB_Kel2.GetValue` (tag teks pink `"SaldoKeluar"`, default angka `0`).
+   - **Set Preview:** Klik komponen `Preview_Riwayat`, tarik blok hijau muda `set Preview_Riwayat.Elements to`. Pasangkan dengan `call DB_Kel2.GetValue` (Isi tag dengan teks pink `"DataRiwayat"`, dan isi `valueIfTagNotThere` dengan blok biru muda `create empty list` dari kategori **Lists**).
+   - Lakukan hal yang sama untuk `set Preview_Wishlist.Elements to` dengan memanggil tag `"ListKebutuhan"`.
 
 ---
 
 ## TAHAP 3: Desain & Blocks - InputUang
 
-Ganti screen aktif ke **InputUang**.
+Ganti screen aktif ke **InputUang** melalui dropdown Screen di atas. Kembali ke mode **Designer**.
 
 ### A. Desain (Designer)
 
 1. **Copy-Paste Header:**
    - Ganti screen kembali ke `HalamanUtama` sebentar.
-   - Klik komponen `HorizontalArrangement` (Header) yang berisi Logo Anda.
+   - Di panel **Components**, klik komponen `HorizontalArrangement` (Header) yang berisi Logo Anda.
    - Tekan tombol **Ctrl + C** (Copy) di keyboard Anda.
    - Ganti screen ke `InputUang`. Tekan tombol **Ctrl + V** (Paste). Header dan Logo akan otomatis muncul beserta blok logikanya.
-2. **Input Keterangan:** Tarik komponen **TextBox** ke bawah header. Ubah **Hint** menjadi: `Keterangan (Contoh: Jajan / Nabung)`. Rename menjadi: `Input_Ket`.
-3. **Input Nominal:** Tarik **TextBox** ke bawahnya. Centang kotak **NumbersOnly**. Ubah **Hint** menjadi: `Nominal Uang`. Rename menjadi: `Input_Nominal`.
-4. **Tombol Simpan:** Tarik dua buah **Button** (bisa diletakkan berdampingan memakai HorizontalArrangement).
+2. **Input Keterangan:** Dari panel **Palette** > **User Interface**, tarik komponen **TextBox** ke bawah header.
+   - Di panel **Properties**, ubah **Hint** menjadi: `Keterangan (Contoh: Jajan / Nabung)`.
+   - Di panel **Components**, Rename menjadi: `Input_Ket`.
+3. **Input Nominal:** Tarik **TextBox** kedua ke bawahnya.
+   - Centang kotak **NumbersOnly** di Properties. Ubah **Hint** menjadi: `Nominal Uang`.
+   - Rename menjadi: `Input_Nominal`.
+4. **Tombol Simpan:** (Agar rapi berdampingan, dari panel **Layout** tarik _HorizontalArrangement_, lalu masukkan 2 **Button** ke dalamnya).
    - Button 1 -> Text: `Simpan Pemasukan`, Rename: `Tombol_Masuk`.
    - Button 2 -> Text: `Simpan Pengeluaran`, Rename: `Tombol_Keluar`.
-5. **Database & Notifikasi:** Tarik **TinyDB** (Rename: `DB_Kel2`) dan **Notifier** (Rename: `Notifikasi_Pesan`).
+5. **Database & Notifikasi:** Dari kategori **Storage**, tarik **TinyDB** (Rename: `DB_Kel2`). Dari kategori **User Interface**, tarik **Notifier** (Rename: `Notifikasi_Pesan`).
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
-1. **Variabel List:** Di kategori **Variables**, tarik `initialize global name to`. Ganti `name` jadi `RiwayatSmt`. Isi dengan blok biru muda `create empty list`.
+1. **Variabel List:** Di panel kiri atas, klik kategori **Variables**, tarik blok `initialize global name to`. Ganti tulisan `name` jadi `RiwayatSmt`. Klik kategori **Lists**, ambil blok `create empty list` dan pasangkan.
 2. **Simpan Pemasukan:**
-   - Tarik blok kuning `when Tombol_Masuk.Click do`.
-   - **Tambah Saldo Masuk:** Tarik blok ungu `StoreValue` tag `"SaldoMasuk"`. Isinya: blok Math `+` (`GetValue` tag `"SaldoMasuk"` ditambah `Input_Nominal.Text`).
+   - Di panel kiri bawah, klik `Tombol_Masuk`, tarik blok kuning `when Tombol_Masuk.Click do`.
+   - **Tambah Saldo Masuk:** Klik `DB_Kel2`, tarik blok ungu `call DB_Kel2.StoreValue` pasang ke dalam blok kuning.
+     - Isi `tag` dengan teks pink `" "` dan ketik `"SaldoMasuk"`.
+     - Isi `valueToStore` dengan blok Math tambah `+`. Sisi kirinya isi dengan `call DB_Kel2.GetValue` (tag `"SaldoMasuk"`, default `0`). Sisi kanannya isi dengan blok hijau tua `Input_Nominal.Text`.
    - **Simpan ke List Riwayat:**
-     - Tarik blok oranye `set global RiwayatSmt to`, isi dengan `GetValue` tag `"DataRiwayat"` (default `create empty list`).
-     - Tarik blok biru muda `add items to list`. List-nya isi dengan `get global RiwayatSmt`. Item-nya gunakan blok `join` (Isi 3 lubang: teks pink `"[+] "`, `Input_Ket.Text`, dan teks pink `" - Rp "`, lalu `Input_Nominal.Text`).
-     - Tarik `StoreValue` tag `"DataRiwayat"`, isinya `get global RiwayatSmt`.
-   - **Notifikasi:** Tarik blok `ShowAlert`, isi pesan: `"Pemasukan Berhasil Disimpan!"`.
+     - Klik kategori **Variables**, tarik blok `set to`. Pilih panah kecilnya ke `global RiwayatSmt`. Pasangkan dengan `call DB_Kel2.GetValue` (isi tag `"DataRiwayat"` dan default `create empty list`). Taruh di bawah StoreValue pertama tadi.
+     - Klik kategori **Lists**, tarik blok biru muda `add items to list`.
+       - Di lubang `list` isi dengan blok merah `get global RiwayatSmt`.
+       - Di lubang `item` isi dengan blok pink `join` dari kategori **Text**.
+       - **PENTING (Menambah Lubang Join):** Klik ikon **gir (gear) biru** pada blok `join` tersebut. Tarik dua buah blok `string` dari kiri ke kanan sehingga sekarang ada **4 lubang**. Klik lagi ikon gir biru.
+       - Isi lubang 1: Ambil teks pink `" "` ketik `"[+] "`.
+       - Isi lubang 2: Ambil blok hijau tua `Input_Ket.Text`.
+       - Isi lubang 3: Ambil teks pink `" "` ketik `" - Rp "`.
+       - Isi lubang 4: Ambil blok hijau tua `Input_Nominal.Text`.
+     - Terakhir, simpan list tersebut: Tarik `call DB_Kel2.StoreValue` isi tag `"DataRiwayat"` dan `valueToStore` isi dengan `get global RiwayatSmt`.
+   - **Notifikasi:** Klik komponen `Notifikasi_Pesan`, tarik blok ungu `call Notifikasi_Pesan.ShowAlert notice`. Isi pesan dengan teks pink: `"Pemasukan Berhasil Disimpan!"`.
 3. **Simpan Pengeluaran:**
-   - Lakukan langkah yang **sama persis** dengan logika pemasukan, tetapi gunakan blok kuning `when Tombol_Keluar.Click do`.
-   - **PENTING:** Ubah tag totalnya menjadi `"SaldoKeluar"`. Pada bagian `join` di list, ubah teks awal menjadi `"[-] "`. Ubah pesan notifikasi menjadi: `"Pengeluaran Berhasil Dicatat!"`.
+   - Lakukan langkah yang **sama persis** dengan logika pemasukan (menggunakan variabel yang sama), tetapi:
+   - Gunakan blok kuning `when Tombol_Keluar.Click do`.
+   - Ubah teks pink `tag` pada saldonya menjadi `"SaldoKeluar"`.
+   - Pada bagian `join` di _add items to list_, ubah teks pink di lubang 1 menjadi `"[-] "`.
+   - Ubah pesan notifikasi teks pink menjadi: `"Pengeluaran Berhasil Dicatat!"`.
 
 ---
 
 ## TAHAP 4: Desain & Blocks - RiwayatTrans
 
-Ganti screen aktif ke **RiwayatTrans**.
+Ganti screen aktif ke **RiwayatTrans** via dropdown. Beralih ke mode **Designer**.
 
 ### A. Desain (Designer)
 
 1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
-2. Tarik **Label** judul di bawah header, ubah Text: `Seluruh Riwayat Transaksi Anda`.
-3. Tarik komponen **ListView**. Ubah **Height** dan **Width** menjadi `Fill parent`. Rename: `Daftar_SemuaRiwayat`.
-4. Tarik **Button** di bawahnya. Ubah Text: `Kembali ke Beranda`. Rename: `Tombol_Kembali`.
-5. Tarik **TinyDB** (Rename: `DB_Kel2`).
+2. Tarik **Label** judul di bawah header, ubah Text: `Seluruh Riwayat Transaksi Anda`. Centang _FontBold_.
+3. Tarik komponen **ListView**. Di panel **Properties**, ubah menu **Height** menjadi `Fill parent` dan **Width** menjadi `Fill parent` (agar daftar memenuhi layar). Rename: `Daftar_SemuaRiwayat`.
+4. Tarik **Button** di paling bawah. Ubah Text: `Kembali ke Beranda`. Rename: `Tombol_Kembali`.
+5. Jangan lupa tarik komponen **TinyDB** (Rename: `DB_Kel2`).
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
-1. **Tampilkan Data:** Tarik blok kuning `when RiwayatTrans.Initialize do`.
-2. Klik `Daftar_SemuaRiwayat`, tarik blok hijau muda `set Daftar_SemuaRiwayat.Elements to`.
-3. Pasangkan dengan blok ungu `call DB_Kel2.GetValue`. Isi `tag`-nya dengan teks pink `"DataRiwayat"`. Isi `valueIfTagNotThere` dengan blok biru muda `create empty list`.
-4. **Tombol Kembali:** Tarik `when Tombol_Kembali.Click do`, lalu `open another screen` ke `"HalamanUtama"`.
+1. **Tampilkan Data:** Klik screen `RiwayatTrans` di panel kiri, tarik blok kuning `when RiwayatTrans.Initialize do`.
+2. Klik komponen `Daftar_SemuaRiwayat`, tarik blok hijau muda `set Daftar_SemuaRiwayat.Elements to`. Masukkan ke blok kuning.
+3. Pasangkan dengan blok ungu `call DB_Kel2.GetValue`. Isi `tag`-nya dengan teks pink `" "` lalu ketik `"DataRiwayat"`. Isi `valueIfTagNotThere` dengan blok biru muda `create empty list`.
+4. **Tombol Kembali:** Klik `Tombol_Kembali`, tarik blok kuning `when Tombol_Kembali.Click do`. Dari kategori **Control**, tarik `open another screen screenName` dan isi teks pink `"HalamanUtama"`.
 
 ---
 
 ## TAHAP 5: Desain & Blocks - WishlistBarang
 
-Ganti screen aktif ke **WishlistBarang**.
+Ganti screen aktif ke **WishlistBarang**. Kembali ke mode **Designer**.
 
 ### A. Desain (Designer)
 
 1. **Paste Header:** Tekan **Ctrl + V** (Paste) di keyboard agar Header dan Logo kembali muncul di atas layar.
-2. **Input Nama Barang:** Tarik **TextBox** ke bawah header. Ubah Hint: `Nama Barang Impian`. Rename: `Input_NamaBarang`.
-3. **Pilih Kategori:** Dari panel **Palette** > **User Interface**, tarik komponen **Spinner**.
-   - Di panel **Properties**, cari kotak `ElementsFromString`. Ketik persis seperti ini (tanpa spasi setelah koma): `Kebutuhan,Keinginan`.
-   - Rename: `Pilih_Kategori`.
-4. **Tombol Simpan:** Tarik **Button**. Text: `Simpan Wishlist`. Rename: `Tombol_SimpanWishlist`.
-5. **Daftar Kebutuhan:** Tarik **Label** (Text: `Daftar Kebutuhan`), lalu tarik **ListView** di bawahnya (Rename: `List_Kebutuhan`).
-6. **Daftar Keinginan:** Tarik **Label** (Text: `Daftar Keinginan`), lalu tarik **ListView** di bawahnya (Rename: `List_Keinginan`).
-7. **Database:** Tarik **TinyDB** (Rename: `DB_Kel2`).
+2. **Input Nama Barang:** Dari panel **Palette**, tarik **TextBox** ke bawah header. Ubah Hint: `Nama Barang Impian`. Rename: `Input_NamaBarang`.
+3. **Pilih Kategori (Penting):** Dari panel **Palette** > **User Interface**, tarik komponen **Spinner**.
+   - Di panel **Properties**, cari kotak bernama **ElementsFromString**. Ketik persis seperti ini (tanpa spasi setelah tanda koma): `Kebutuhan,Keinginan`.
+   - Di panel **Components**, Rename: `Pilih_Kategori`.
+4. **Tombol Simpan:** Tarik komponen **Button**. Ubah Text: `Simpan Wishlist`. Rename: `Tombol_SimpanWishlist`.
+5. **Daftar Kebutuhan:** Tarik **Label** (Ubah Text: `Daftar Kebutuhan`), lalu tarik **ListView** tepat di bawahnya (Rename: `List_Kebutuhan`).
+6. **Daftar Keinginan:** Tarik **Label** (Ubah Text: `Daftar Keinginan`), lalu tarik **ListView** tepat di bawahnya (Rename: `List_Keinginan`).
+7. Tarik **TinyDB** dari Storage (Rename: `DB_Kel2`).
 
 ### B. Kode (Blocks)
 
 Pindah ke tampilan **Blocks**.
 
-1. Buat 2 variabel List di kategori **Variables**: `global ListKebutuhanSmt` dan `global ListKeinginanSmt`. Isi keduanya dengan `create empty list`.
-2. Tarik blok kuning `when Tombol_SimpanWishlist.Click do`.
-3. Dari kategori **Control**, tarik blok `if then else`.
-4. **Kondisi (Bagian if):** Gunakan blok logika `=`. Jika `Pilih_Kategori.Selection` sama dengan teks pink `"Kebutuhan"`.
+1. Di kategori **Variables**, buat 2 variabel List global menggunakan `initialize global name to`.
+   - Yang pertama beri nama `ListKebutuhanSmt` dan pasangkan dengan `create empty list`.
+   - Yang kedua beri nama `ListKeinginanSmt` dan pasangkan dengan `create empty list`.
+2. Di panel kiri bawah, klik `Tombol_SimpanWishlist`, tarik blok kuning `when Tombol_SimpanWishlist.Click do`.
+3. Dari kategori **Control** (kiri atas), tarik blok `if then else` masukkan ke dalam blok kuning.
+4. **Kondisi (Bagian if):** Dari kategori **Logic**, tarik blok sama dengan `=`.
+   - Sisi kiri `=`: Klik `Pilih_Kategori`, tarik blok hijau tua `Pilih_Kategori.Selection`.
+   - Sisi kanan `=`: Ambil teks pink `" "` dan ketik `"Kebutuhan"`.
 5. **Simpan ke Kebutuhan (Bagian then):**
-   - `set global ListKebutuhanSmt` ke `GetValue` tag `"ListKebutuhan"`.
-   - `add items to list` (list: `get global ListKebutuhanSmt`, item: `Input_NamaBarang.Text`).
-   - `StoreValue` tag `"ListKebutuhan"` dengan nilai `get global ListKebutuhanSmt`.
-   - Update layar: `set List_Kebutuhan.Elements to` dengan `get global ListKebutuhanSmt`.
+   - Klik kategori **Variables**, tarik blok `set to` pilih `global ListKebutuhanSmt`. Pasangkan dengan `call DB_Kel2.GetValue` (tag teks pink `"ListKebutuhan"`, default `create empty list`).
+   - Klik kategori **Lists**, tarik `add items to list`. Lubang `list` isi dengan `get global ListKebutuhanSmt`. Lubang `item` isi dengan blok hijau tua `Input_NamaBarang.Text`.
+   - Klik `DB_Kel2`, tarik `StoreValue` tag `"ListKebutuhan"` dan `valueToStore` isi dengan `get global ListKebutuhanSmt`.
+   - Update layar: Klik `List_Kebutuhan`, tarik `set List_Kebutuhan.Elements to` dan pasangkan dengan `get global ListKebutuhanSmt`.
 6. **Simpan ke Keinginan (Bagian else):**
-   - Lakukan hal yang sama persis seperti langkah 5, tapi gunakan variabel `ListKeinginanSmt`, tag `"ListKeinginan"`, dan tampilkan ke `List_Keinginan.Elements`.
-7. **Inisialisasi (Opsional tapi penting):** Gunakan blok `when WishlistBarang.Initialize do` untuk mengambil data `GetValue` dari tag `"ListKebutuhan"` dan `"ListKeinginan"`, lalu menampilkannya ke kedua ListView saat layar baru pertama kali dibuka.
+   - Lakukan hal yang **sama persis** seperti langkah 5 ke dalam celah `else`.
+   - Namun, ganti semuanya menggunakan variabel `ListKeinginanSmt`, tag `"ListKeinginan"`, dan tampilkan ke komponen `List_Keinginan.Elements`.
+7. **Memunculkan Data Saat Dibuka:** - Di panel kiri bawah, klik nama screen `WishlistBarang` (ikon HP), tarik blok kuning `when WishlistBarang.Initialize do`.
+   - Tarik `set List_Kebutuhan.Elements to` pasangkan dengan `call DB_Kel2.GetValue` (tag teks pink `"ListKebutuhan"`, default `create empty list`).
+   - Di bawahnya, tarik `set List_Keinginan.Elements to` pasangkan dengan `call DB_Kel2.GetValue` (tag teks pink `"ListKeinginan"`, default `create empty list`).
 
-> **PENTING:** Silakan coba Run program dari awal sampai akhir, periksa apakah input berjalan dan saldo terpotong/bertambah secara otomatis. Jangan lupa Save!
+> **PENTING:** Silakan coba Connect/Run program dari awal sampai akhir di HP Anda, periksa apakah input berjalan, saldo terpotong, dan wishlist berhasil terpisah ke kategori masing-masing. Jangan lupa Save project Anda (Projects > Save project)!

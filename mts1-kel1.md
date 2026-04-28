@@ -160,9 +160,9 @@ Pindah ke tampilan **Blocks**.
 1. Di panel kiri atas, klik kategori **Variables**, tarik blok `initialize global name to`. Ganti tulisan `name` jadi `RiwayatMasuk`. Klik kategori **Lists** (biru muda), tarik `create empty list` dan pasangkan.
 2. Di panel kiri bawah, klik `Tombol_SimpanMasuk`, tarik blok kuning `when Tombol_SimpanMasuk.Click do`.
 3. **Simpan Total:** Klik `Database_Kel1`, tarik blok ungu `call Database_Kel1.StoreValue`. Pasangkan ke blok kuning.
-   - Isi `tag` dengan teks pink `"TotalMasuk"`.
+   - Isi `tag` dengan mengklik kategori **Text**, ambil blok teks pink `" "`, lalu ketik: `"TotalMasuk"`.
    - Isi `valueToStore` dengan mengklik kategori **Math**, tarik blok tambah `+`.
-     - Sisi kiri `+`: Klik `Database_Kel1`, ambil `GetValue` (isi tag `"TotalMasuk"`, isi `valueIfTagNotThere` dengan angka `0` dari Math).
+     - Sisi kiri `+`: Klik `Database_Kel1`, ambil `GetValue` (isi tag dengan teks pink `"TotalMasuk"`, isi `valueIfTagNotThere` dengan angka `0` dari Math).
      - Sisi kanan `+`: Klik `Input_Nominal` di panel kiri, ambil blok hijau tua `Input_Nominal.Text`.
 4. **Update Riwayat:** Klik kategori **Lists**, tarik blok biru muda `add items to list`. Letakkan di bawah susunan `StoreValue`.
    - Di lubang `list`: Klik kategori **Variables**, ambil blok merah `get`, klik tanda panahnya pilih `global RiwayatMasuk`.
@@ -178,7 +178,7 @@ Pindah ke tampilan **Blocks**.
 1. Buat variabel global baru dari kategori **Variables** (`initialize global name to`), beri nama `RiwayatKeluar` dan pasangkan dengan `create empty list` dari kategori **Lists**.
 2. Klik `Tombol_SimpanKeluar` di panel kiri, tarik blok kuning `when Tombol_SimpanKeluar.Click do`.
 3. Lakukan langkah penyusunan blok yang **sama persis** seperti Bagian 2 di atas, namun pastikan Anda:
-   - Mengubah `tag` pada StoreValue dan GetValue menjadi `"TotalKeluar"`.
+   - Mengubah `tag` pada StoreValue dan GetValue menggunakan teks pink menjadi `"TotalKeluar"`.
    - Mengubah `list` pada blok `add items to list` menjadi `global RiwayatKeluar`.
    - Menampilkan list menggunakan komponen `set List_Pengeluaran.Elements to` dengan memanggil `get global RiwayatKeluar`.
 
@@ -243,11 +243,11 @@ Pindah ke tampilan **Blocks**.
 2. **Menyimpan Data Target:**
    - Klik `Tombol_SimpanTarget`, tarik blok kuning `when Tombol_SimpanTarget.Click do`.
    - Gunakan blok ungu `call Database_Kel1.StoreValue` dari komponen `Database_Kel1` sebanyak 4 kali berurutan ke bawah.
-   - Simpan Data 1: Isi tag `"Target_Nama"` dari text pink. Isi `valueToStore` dengan blok hijau tua `Input_NamaBarang.Text`.
-   - Simpan Data 2: Isi tag `"Target_Harga"` dari text pink. Isi `valueToStore` dengan blok hijau tua `Input_HargaBarang.Text`.
-   - Simpan Data 3: Isi tag `"Target_Tanggal"` dari text pink. Isi `valueToStore` dengan blok hijau tua `Input_TglMulai.Text`.
-   - Simpan Data 4: Isi tag `"Target_Gambar"` dari text pink. Isi `valueToStore` dengan mengklik `Preview_Gambar` lalu pilih `Preview_Gambar.Picture`.
-   - Terakhir, klik `Notifier1`, tarik `call Notifier1.ShowAlert notice` dan isi pesan dengan teks pink: `"Target Berhasil Dibuat!"`.
+   - **Simpan Data 1:** Klik kategori **Text**, tarik teks pink `" "` ke bagian `tag`, lalu ketik: `"Target_Nama"`. Isi `valueToStore` dengan mengklik `Input_NamaBarang`, lalu tarik blok hijau tua `Input_NamaBarang.Text`.
+   - **Simpan Data 2:** Tarik lagi teks pink `" "` ke bagian `tag`, lalu ketik: `"Target_Harga"`. Isi `valueToStore` dengan blok hijau tua `Input_HargaBarang.Text`.
+   - **Simpan Data 3:** Tarik teks pink `" "` ke bagian `tag`, lalu ketik: `"Target_Tanggal"`. Isi `valueToStore` dengan blok hijau tua `Input_TglMulai.Text`.
+   - **Simpan Data 4:** Tarik teks pink `" "` ke bagian `tag`, lalu ketik: `"Target_Gambar"`. Isi `valueToStore` dengan mengklik `Preview_Gambar` lalu pilih blok hijau tua `Preview_Gambar.Picture`.
+   - Terakhir, klik `Notifier1`, tarik `call Notifier1.ShowAlert notice` dan isi pesan dengan menarik blok teks pink `" "` lalu ketik: `"Target Berhasil Dibuat!"`.
 3. **Menampilkan Jumlah Tabungan Saat Ini:**
    - Klik nama screen `TabunganTarget` (ikon HP), tarik blok kuning `when TabunganTarget.Initialize do`.
    - Klik komponen `Teks_InfoTarget`, tarik blok hijau muda `set Teks_InfoTarget.Text to`.
