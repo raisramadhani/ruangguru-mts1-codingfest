@@ -327,3 +327,50 @@ Silakan buka tampilan **Blocks** pada screen **SaldoVisual** dan lakukan perbaik
 4. Pastikan sekarang di dalam celah `then` pada blok `if` **HANYA** tersisa satu blok saja, yaitu blok oranye: `set PersenAir to 100`.
 
 _(Sesuai dengan panduan Tahap 4 Langkah 5: "Di bawah blok if tadi, klik Visual_Air...")_
+
+---
+
+---
+
+## 🛠️ KOREKSI ERROR TAHAP 2: Level Tidak Berubah & Tombol Reset Database
+
+Jangan panik jika visual air masih 100% atau level tabungan ngawur. Ini terjadi karena dua hal: ada tanda matematika yang terbalik di sistem Level, dan Database (TinyDB) masih menyimpan data yang rusak dari hasil uji coba (error) sebelumnya.
+
+Mari kita perbaiki satu per satu!
+
+### 1. Memperbaiki Level Tabungan yang Ngawur (HalamanUtama)
+
+**Penyebab:** Pada susunan blok `if - else if` penentu level, siswa keliru menggunakan lambang **Lebih Besar ( > )** padahal seharusnya menggunakan lambang **Kurang Dari ( < )**. Ini membuat logika level saling bertabrakan.
+
+**Langkah Perbaikan (Di layar Blocks `HalamanUtama`):**
+
+1. Cari susunan blok `if - else if` yang mengatur `"Level: Apprentice..."`, `"Level: Warrior..."`, dst.
+2. Perhatikan blok warna biru muda (Math) yang membandingkan `get SaldoTotal` dengan angka (100000, 500000, 1000000).
+3. Klik tanda panah kecil pada blok `>` tersebut, lalu ubah semuanya kembali menjadi lambang **`<` (Kurang Dari)**.
+4. Pastikan susunannya urut dari atas ke bawah: `< 50000`, lalu `< 100000`, lalu `< 500000`, lalu `< 1000000`.
+
+### 2. Membuat Tombol Reset Global (Solusi Visual Air Nyangkut 100%)
+
+**Penyebab:** Visual air di `SaldoVisual` nyangkut di 100% karena sistem masih mengingat data uji coba yang lama (misalnya: target tabungan belum diisi sehingga bernilai 0 atau 1, sementara saldonya sudah puluhan ribu). Kita harus "mencuci bersih" database-nya.
+
+**Langkah Pembuatan (Di `HalamanUtama`):**
+
+1. **Designer:** Tarik satu komponen **Button** ke bawah tombol menu yang sudah ada. Ubah `Text`-nya menjadi `Reset Aplikasi` (boleh beri warna merah agar jelas). Rename komponennya menjadi `Tombol_Reset`.
+2. **Blocks:** Di panel kiri bawah, klik `Tombol_Reset` dan tarik blok kuning `when Tombol_Reset.Click do`.
+3. Di panel kiri bawah, klik komponen `DB_Kel3`, cari dan tarik blok ungu `call DB_Kel3.ClearAll`. Pasangkan ke dalam blok kuning tadi. _(Fungsi ini akan menghapus seluruh saldo, target, dan riwayat)._
+4. _Opsional:_ Tambahkan `Notifikasi` (ShowAlert notice) dengan teks `"Database berhasil direset! Silakan input target baru."`
+5. **Cara Pakai:** Jalankan aplikasi di HP, tekan tombol "Reset Aplikasi", lalu coba **Input Target** dan **Input Saldo** dari awal. Visual air pasti akan berjalan normal!
+
+---
+
+### ⚠️ BONUS KOREKSI PENTING: Riwayat Transaksi Hilang (InputData)
+
+Dari screenshot yang dilampirkan, ada kesalahan fatal pada logika penyimpanan Riwayat yang akan membuat halaman Riwayat kosong melompong.
+
+**Langkah Perbaikan (Di layar Blocks `InputData`):**
+
+1. Fokus ke bagian `when Tombol_Masuk.Click do`.
+2. Pada blok `set global RiwayatSmt to`, perhatikan lubang `valueIfTagNotThere`. Hapus blok angka `0`, lalu ganti dengan blok biru muda `create empty list` (dari kategori Lists). _List tidak boleh bernilai 0._
+3. **Paling Penting:** Perhatikan blok ungu paling bawah yaitu `call DB_Kel3.StoreValue tag "DataRiwayat"`. Siswa memasukkan `create empty list` ke lubang `valueToStore`. **Ini salah besar karena akan mereset riwayat setiap kali tombol ditekan!**
+4. Buang blok `create empty list` tersebut, dan ganti dengan arahkan kursor ke variabel `global RiwayatSmt` lalu ambil blok merah `get global RiwayatSmt`.
+5. Lakukan hal yang **sama persis** pada blok `when Tombol_Keluar.Click do`.
