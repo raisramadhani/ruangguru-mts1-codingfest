@@ -267,3 +267,46 @@ Pindah ke tampilan **Blocks**.
 4. Isi `tag`-nya dengan teks pink `" "` lalu ketik: `"DataRiwayat"`. Isi `valueIfTagNotThere` dengan blok biru muda `create empty list` dari kategori **Lists**.
 
 > **PENTING:** Silakan coba Connect/Run program dari awal sampai akhir di HP Anda, periksa apakah perhitungan analisis persentase boros/hemat berjalan dan riwayat transaksinya muncul dengan benar. Jangan lupa Save project Anda (Projects > Save project)!
+
+---
+
+## TAHAP 7: Membuat Tombol Reset (Hapus Semua Data)
+
+Karena aplikasi kita sudah bisa menyimpan banyak data, kita perlu tombol khusus untuk menghapus seluruh data tersebut jika sewaktu-waktu ingin mengulang perhitungan dari nol. Kita akan meletakkan tombol ini di **HalamanUtama**.
+
+Pastikan di bagian atas layar App Inventor, Anda sedang berada di Screen **HalamanUtama** (Cek kotak dropdown). Kembali ke mode **Designer**.
+
+### A. Desain (Designer)
+
+1. **Membuat Tombol Reset:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **Button** ke layar HP, letakkan di paling bawah setelah tombol Menu Riwayat Transaksi.
+   - Di panel **Properties**, cari kotak **BackgroundColor** dan ubah menjadi warna **Red** (merah).
+   - Masih di panel **Properties**, cari kolom **Text** dan ubah tulisannya menjadi: `Hapus Semua Data (Reset)`.
+   - Cari kolom **TextColor** dan ubah menjadi **White** (putih) agar tulisan terlihat jelas.
+   - Di panel **Components**, klik komponen Button tersebut, klik tombol **Rename**, ubah namanya menjadi: `Tombol_Reset` lalu klik OK.
+2. **Pesan Notifikasi:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **Notifier** ke gambar HP. (Komponen ini tidak akan terlihat di layar HP, melainkan masuk ke bagian _Non-visible components_ di bawah HP).
+   - Di panel **Components**, klik komponen Notifier tersebut, klik **Rename**, ubah menjadi: `Notifikasi_Reset`.
+
+### B. Kode (Blocks)
+
+Pindah ke tampilan **Blocks** dengan mengklik tombol **Blocks** di pojok kanan atas.
+
+1. **Memulai Tombol:** Di panel sebelah kiri bawah (daftar komponen), cari dan klik `Tombol_Reset`. Akan muncul laci blok, tarik blok kuning: `when Tombol_Reset.Click do` ke area putih yang kosong.
+2. **Menghapus Seluruh Database:**
+   - Di panel kiri bawah, klik komponen `DB_Kel4` (logo TinyDB).
+   - Scroll ke bawah, cari dan tarik blok ungu `call DB_Kel4.ClearAll`. Masukkan ke dalam celah blok kuning `when Tombol_Reset.Click do`. _(Catatan: Blok ini sangat kuat, ia akan langsung menyapu bersih semua isi database tanpa sisa)._
+3. **Mengubah Tampilan Saldo Jadi Nol:**
+   - Agar tulisan saldo di layar utama langsung ikut berubah saat ditekan, klik komponen `Teks_SaldoSekarang` di panel kiri. Tarik blok hijau muda `set Teks_SaldoSekarang.Text to` ke bawah blok ungu tadi.
+   - Klik kategori **Text** (warna pink), tarik blok `join` dan pasangkan.
+   - Lubang atas `join`: Ambil teks pink kosong `" "` lalu ketik `"Saldo: Rp "`.
+   - Lubang bawah `join`: Ambil teks pink kosong `" "` lagi lalu ketik angka `"0"`.
+4. **Mengubah Tampilan Pengeluaran Jadi Nol:**
+   - Klik komponen `Teks_TotalPengeluaran`, tarik blok hijau muda `set Teks_TotalPengeluaran.Text to` ke bawah susunan blok Saldo.
+   - Gunakan blok `join` lagi dari kategori **Text**.
+   - Lubang atas `join`: Ambil teks pink kosong `" "` lalu ketik `"Total Pengeluaran: Rp "`.
+   - Lubang bawah `join`: Ambil teks pink kosong `" "` lalu ketik angka `"0"`.
+5. **Menampilkan Pesan Berhasil:**
+   - Di panel kiri bawah, klik komponen `Notifikasi_Reset`.
+   - Tarik blok ungu `call Notifikasi_Reset.ShowAlert notice` ke posisi paling bawah di dalam blok kuning.
+   - Klik kategori **Text**, ambil blok teks pink kosong `" "`, pasangkan ke sebelah `notice`, dan ketik: `Semua data berhasil dihapus!`.
+
+> **PENTING:** Silakan coba Connect/Run program di HP Anda lagi. Cobalah klik tombol **Hapus Semua Data (Reset)** di Halaman Utama. Setelah itu, buka menu **Riwayat Transaksi** atau **Analisis Keuangan** untuk memastikan bahwa semua catatannya benar-benar sudah kembali kosong seperti aplikasi yang baru saja diinstal.
