@@ -293,3 +293,37 @@ Untuk halaman Tips & Trik ini, karena isinya bersifat statis (hanya tulisan pand
 Anda **TIDAK PERLU** menyusun kode apa pun di tampilan Blocks untuk halaman ini.
 
 > **PENTING:** Silakan coba Connect/Run program dari awal sampai akhir di HP Anda! Coba lakukan Input Saldo dan Target, lalu periksa halaman Visual Tabungan apakah tinggi air di dalam toples sudah naik otomatis sesuai persentase target. Jika semuanya lancar, jangan lupa klik **Projects > Save project**.
+
+---
+
+## ⚠️ KOREKSI ERROR: Visual Air Selalu 100% (Halaman SaldoVisual)
+
+# Apabila tidak error, abaikan!
+
+Jika saat diuji coba (Connect) visual air di dalam toples langsung penuh 100% padahal target tabungan belum tercapai, tidak perlu panik. Fitur dan aplikasinya sudah benar, hanya ada **dua kekeliruan kecil saat menempelkan blok kode**.
+
+Silakan buka tampilan **Blocks** pada screen **SaldoVisual** dan lakukan perbaikan berikut:
+
+### 1. Memperbaiki Rumus "SaldoSekarang"
+
+**Penyebab:** Sistem belum mengurangkan Pemasukan dengan Pengeluaran. Blok `GetValue` untuk "TotalKeluar" masih terlepas (mengambang) di sisi kanan layar.
+
+**Langkah Perbaikan:**
+
+1. Pada baris variabel oranye `initialize local SaldoSekarang`, tarik/geser sebentar blok ungu `call DB_Kel3.GetValue` (tag "TotalMasuk") agar terlepas dari tempatnya.
+2. Di panel kiri atas, klik kategori **Math** (biru muda), cari blok pengurangan **`-`**, lalu pasangkan ke celah kosong di sebelah `SaldoSekarang`.
+3. Pasangkan kembali blok `GetValue` (tag "TotalMasuk") tadi ke lubang sebelah **KIRI** pada blok kurang `-` tersebut.
+4. Ambil blok ungu `GetValue` (tag "TotalKeluar") yang sedang mengambang di layar sebelah kanan, lalu pasangkan ke lubang sebelah **KANAN** pada blok kurang `-`.
+
+### 2. Memperbaiki Posisi Blok Visual Air & Teks
+
+**Penyebab:** Blok untuk mengatur tinggi air dan teks persentase tidak sengaja masuk ke **dalam** kerangka `if`. Akibatnya, visual layar menolak untuk bergerak kecuali saldonya sudah melewati 100%.
+
+**Langkah Perbaikan:**
+
+1. Fokus ke bagian blok `if then` (yang berisi syarat `get PersenAir > 100`).
+2. Klik dan tarik blok hijau muda `set Visual_Air.HeightPercent to` (blok `set Teks_Persen.Text to` di bawahnya akan otomatis ikut terbawa) **KELUAR** dari celah `then`.
+3. Pasangkan kedua blok tersebut tepat di **BAWAH** susunan `if` (sejajar dengan garis luar blok `if`, bukan di dalamnya).
+4. Pastikan sekarang di dalam celah `then` pada blok `if` **HANYA** tersisa satu blok saja, yaitu blok oranye: `set PersenAir to 100`.
+
+_(Sesuai dengan panduan Tahap 4 Langkah 5: "Di bawah blok if tadi, klik Visual_Air...")_
