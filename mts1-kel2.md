@@ -227,3 +227,36 @@ Pindah ke tampilan **Blocks**.
    - Di bawahnya, tarik `set List_Keinginan.Elements to` pasangkan dengan `call DB_Kel2.GetValue` (tag teks pink `"ListKeinginan"`, default `create empty list`).
 
 > **PENTING:** Silakan coba Connect/Run program dari awal sampai akhir di HP Anda, periksa apakah input berjalan, saldo terpotong, dan wishlist berhasil terpisah ke kategori masing-masing. Jangan lupa Save project Anda (Projects > Save project)!
+
+---
+
+## TAHAP 6: Membuat Fitur Hapus Semua Data (Reset)
+
+Karena aplikasi ini akan digunakan berulang kali, kita membutuhkan tombol untuk mereset (menghapus) seluruh data tabungan dan daftar barang agar kembali kosong. Kita akan menaruh tombol ini di **HalamanUtama**.
+
+Pastikan Anda mengganti screen aktif kembali ke **HalamanUtama** (melalui kotak dropdown Screen di bagian atas). Beralihlah kembali ke mode **Designer**.
+
+### A. Desain (Designer)
+
+1. **Tombol Hapus:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **Button** ke layar HP, letakkan di posisi paling bawah (di bawah tombol-tombol menu lainnya).
+      - Di panel **Properties**, cari menu **BackgroundColor** dan ubah menjadi warna merah (`Red`) agar menjadi penanda bahwa ini adalah tombol yang penting/berbahaya.
+      - Masih di panel **Properties**, ubah tulisan di kolom **Text** menjadi: `Hapus Semua Data`.
+      - Di panel **Components**, klik komponennya lalu klik **Rename**, ubah menjadi: `Tombol_HapusData`.
+2. **Notifikasi:** Dari panel **Palette** > kategori **User Interface**, tarik komponen **Notifier** ke gambar HP.
+      - Di panel **Components**, biarkan namanya tetap `Notifier1` (ingat, komponen ini tidak akan terlihat langsung di layar HP, tapi akan muncul di bagian bawah layar sebagai _Non-visible components_).
+
+### B. Kode (Blocks)
+
+Pindah ke tampilan **Blocks** dengan mengklik tombol Blocks di pojok kanan atas.
+
+1. **Logika Tombol Hapus:** Di panel sebelah kiri bawah, cari dan klik `Tombol_HapusData`. Tarik blok kuning `when Tombol_HapusData.Click do` ke area putih yang kosong.
+2. **Menghapus Database:** Di panel kiri bawah, klik komponen database `DB_Kel2`. Cari dan tarik blok ungu `call DB_Kel2.ClearAll` (blok ini berfungsi menyapu bersih semua tag dan data yang pernah kita simpan). Pasangkan ke dalam celah blok kuning tadi.
+3. **Mengembalikan Tampilan Menjadi Nol:** Setelah data di dalam _database_ terhapus, kita harus langsung memperbarui tampilan layar agar ikut menjadi nol/kosong saat itu juga.
+      - **Reset Saldo:** Klik `Teks_SaldoSekarang`, tarik blok hijau muda `set Teks_SaldoSekarang.Text to`. Masukkan tepat di bawah blok ungu `ClearAll`. Ambil blok teks pink `" "` dari kategori **Text** dan ketik persis: `Saldo: Rp 0`.
+      - **Reset Preview Riwayat:** Klik `Preview_Riwayat`, tarik blok hijau muda `set Preview_Riwayat.Elements to`. Klik kategori **Lists** (warna biru muda), tarik blok `create empty list` dan pasangkan.
+      - **Reset Preview Wishlist:** Lakukan hal yang sama. Klik `Preview_Wishlist`, tarik blok hijau muda `set Preview_Wishlist.Elements to` dan pasangkan juga dengan blok `create empty list` dari kategori **Lists**.
+4. **Memunculkan Pesan Sukses:** Terakhir, klik komponen `Notifier1` di panel kiri bawah. Tarik blok ungu `call Notifier1.ShowAlert notice`. Ambil blok teks pink `" "` dari kategori **Text**, pasangkan ke sebelah tulisan `notice`, dan ketik: `Seluruh data berhasil direset!`.
+
+> **PENTING:** Silakan Connect/Run ulang aplikasi Anda di HP. Coba tekan tombol "Hapus Semua Data". Jika kode Anda benar, saldo akan langsung berubah menjadi Rp 0, dan semua daftar (riwayat & wishlist) akan langsung kosong tak tersisa.
+>
+> Selamat! Aplikasi kelompok Anda sudah lengkap dan siap digunakan. Jangan lupa simpan hasil kerja Anda dengan klik menu **Projects > Save project**.
